@@ -1,6 +1,12 @@
 {
-  "name": "HelloIonic",
+  "name": "Planner",
   "private": "true",
+  "version": "0.0.0",
+  "description": "Collaboration planner project",
+  "author": "Jo-Ries P. Canino, John Kenneth M. Magtoto",
+  "email": "https://github.com/enceladus-jp/planner",
+  "private": "true",
+  "license": "MIT",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
