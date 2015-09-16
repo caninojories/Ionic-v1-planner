@@ -1,4 +1,29 @@
-<ion-tabs class="tabs-icon-top">
+<!-- <ion-view view-title="Home"> -->
+  <!-- <ion-nav-bar class="bar bar-light"> -->
+    <!-- <ion-nav-back-button></ion-nav-back-button> -->
+    <!-- <ion-nav-buttons side="primary">
+      <button class="icon ion-gear-a button button-clear button-outline"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="secondary">
+      <button class="icon ion-plus button button-clear button-outline"></button>
+    </ion-nav-buttons> -->
+  <!-- </ion-nav-bar> -->
+<!-- </ion-view> -->
+
+<ion-tabs class="tabs-icon-top tabs-positive">
+  <ion-tab title="Home" icon="ion-home" href="#/tab/home">
+    <ion-nav-view name="home-tab"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="Time" icon="ion-clock">
+    <ion-nav-view name="clock-tab"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="Bookmarks" icon="ion-bookmark">
+    <ion-nav-view name="bookmark-tab"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>
+
+
+<!-- <ion-tabs class="tabs-icon-top">
   <ion-tab title="Time" icon="ion-clock">
     <ion-view >
     <ion-content class="has-header">
@@ -30,4 +55,4 @@
   </ion-view>
   </ion-tab>
   <ion-tab title="Bookmarks" icon="ion-bookmark"></ion-tab>
-</ion-tabs>
+</ion-tabs> -->
