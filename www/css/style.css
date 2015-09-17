@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+.no-top-padding {
+  padding-top: 0px;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.no-margin {
+  margin: 0px;
+}
