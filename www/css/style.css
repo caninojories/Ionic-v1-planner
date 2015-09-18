@@ -10,3 +10,11 @@
 .no-margin {
   margin: 0px;
 }
+
+.card-header-passed {
+  color: #EF473A !important;
+}
+
+.card-header-upcomming {
+  color: #387EF5 !important ;
+}
