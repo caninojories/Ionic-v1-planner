@@ -6,8 +6,36 @@
         <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
       </ionic-datepicker>
     </div>
+    <div class="padding">
+      <h4>Select a Timezone</h4>
+      <button ng-click="openPopover($event)" class="button button-assertive button-block icon ion-plus-circled"></button>
+    </div>
 
-    <div class="bar item-input-inset bar-light">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div ng-show="vm.showReorder">
+        <button ng-click="vm.showReorder = !vm.showReorder; data.showDelete = false;" class="button button-large button-icon ion-navicon">
+        </button>
+      </div>
+    </div>
+
+    <ion-list show-delete="vm.showDelete" show-reorder="vm.showReorder">
+      <ion-item ng-repeat="zone in vm.zone_list" on-hold="vm.on_hold(zone)">
+        <h2 ng-bind-html="zone"></h2>
+        <ion-option-button class="button-clear button-assertive">
+          Delete <i class="ion-checkmark-circled padding-left"></i>
+        </ion-option-button>
+        <ion-option-button class="button-clear button-positive">
+          <i class="ion-close-circled"></i>
+        </ion-option-button>
+        <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)">
+        </ion-delete-button>
+        <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)">
+        </ion-reorder-button>
+      </ion-item>
+    </ion-list>
+    <!-- <div class="bar item-input-inset bar-light">
       <label class="item-input-wrapper">
         <i class="icon ion-search placeholder-icon"></i>
         <input on-search type="search" placeholder="Search">
@@ -19,6 +47,6 @@
         <span ng-bind-html="zone"></span>
         <i class="icon ion ion-plus-circled"></i>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
   </ion-content>
 </ion-view>

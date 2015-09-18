@@ -68,5 +68,6 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
     }
   });
 
+  
   $urlRouterProvider.otherwise('/tab/home');
 });
