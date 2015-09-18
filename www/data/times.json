@@ -1,0 +1,14 @@
+[
+  {
+    "id" : 1,
+    "times" : [
+      "Asia/Manila - 12:00PM",
+      "Asia/Tokyo - 01:00PM",
+      "Europe/Berlin - 06:00AM"
+    ],
+    "participants" : [
+      "Jories Canino (ushi@something.com)",
+      "Kevin Lumanlan (tori@something.com)"
+    ]
+  }
+]

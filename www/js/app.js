@@ -24,18 +24,18 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
     abstract    : true,
     templateUrl : 'templates/tabs.html'
   })
-  .state('tabs.home', {
-    url   : '/home',
+  .state('tabs.time', {
+    url   : '/time',
     views : {
-      'home-tab': {
-        templateUrl: 'templates/home.html'
+      'time-tab': {
+        templateUrl: 'templates/time.html'
       }
     }
   })
   .state('tabs.timezone', {
-    url   : '/home/timezone',
+    url   : '/time/timezone',
     views : {
-      'home-tab': {
+      'time-tab': {
         templateUrl : 'templates/timezone.html',
         controller  : 'TimezoneCtrl as vm',
         resolve     : {
@@ -68,6 +68,5 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
     }
   });
 
-  
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/tab/time');
 });
