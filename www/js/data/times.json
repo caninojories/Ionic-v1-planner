@@ -1,0 +1,20 @@
+[
+  {
+    "id" : 0,
+    "urgency" : "Upcomming",
+    "times" : [
+      "Asia/Manila - 12:00PM",
+      "Asia/Tokyo - 01:00PM",
+      "Europe/Berlin - 06:00AM"
+    ]
+  },
+  {
+    "id" : 1,
+    "urgency" : "Upcomming",
+    "times" : [
+      "Asia/Manila - 12:00PM",
+      "Asia/Tokyo - 01:00PM",
+      "Europe/Berlin - 06:00AM"
+    ]
+  }
+]
