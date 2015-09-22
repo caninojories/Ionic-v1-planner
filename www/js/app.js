@@ -33,6 +33,15 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
       }
     }
   })
+  .state('tabs.timedetail', {
+    url   : '/time/:timeId',
+    views : {
+      'time-tab': {
+        templateUrl: 'templates/timedetail.html',
+        controller: 'TimeCtrl as vm'
+      }
+    }
+  })
   .state('tabs.timezone', {
     url   : '/time/timezone',
     views : {

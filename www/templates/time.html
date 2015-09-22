@@ -6,12 +6,13 @@
   <ion-nav-buttons side="secondary">
     <a href="#/tab/time/timezone">
       <button class="icon ion-plus button button-clear button-outline">
+
       </button>
     </a>
   </ion-nav-buttons>
 
   <ion-content class="has-header">
-    <div class="list card" ng-repeat="item in timedata">
+    <div class="list card" ng-repeat="item in timedata" ng-click="displayDetail(item.id)">
       <div class="item item-divider item-light">
         <h3 class="title card-header-upcomming"><i class="ionic ion-clock"> {{item.urgency}}</i></h3>
       </div>

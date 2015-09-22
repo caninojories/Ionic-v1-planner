@@ -1,0 +1,15 @@
+<ion-view view-title="Time Detail">
+  <ion-nav-buttons side="secondary">
+    <button class="icon ion-edit button button-small button-clear"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list class="list-inset">
+      <ion-item class="item-text-wrap" ng-repeat="item in timedata | filter: { id: timecard }">
+        <h3>Time: </h3>
+        <ul ng-repeat="locationTime in item.times">
+          <li>Location {{$index + 1}} : {{locationTime}}</li>
+        </ul>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
