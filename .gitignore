@@ -6,3 +6,5 @@ platforms/
 plugins/
 .DS_Store
 lib/
+.io-config.json
+ionic.project

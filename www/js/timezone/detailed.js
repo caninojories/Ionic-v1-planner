@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('DetailedCtrl', DetailedCtrl);
 
-    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicHistory', 'PlannerService'];
+    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$window', '$ionicHistory', 'PlannerService'];
 
-    function DetailedCtrl($rootScope, $scope, $state, $ionicHistory, PlannerService) {
+    function DetailedCtrl($rootScope, $scope, $state, $window, $ionicHistory, PlannerService) {
       var vm = this;
 
       vm.choose_time        = choose_time;
@@ -63,17 +63,13 @@
           objToStore.timeArray[i] = event;
         }
         PlannerService.addEvent(objToStore) ;
-        go_home() ;
-      }
 
-      function go_home(){
-        // $ionicHistory.nextViewOptions({
-        //   disableBack: true
-        // });
-        // $ionicHistory.clearHistory() ;
+        $ionicHistory.nextViewOptions({
+          disableAnimate: true,
+          disableBack: true
+        });
 
-        console.log(PlannerService.getAllEvents().then(function(eventlist){return eventlist})) ;
-        $state.transitionTo('tabs.time') ;
+        $state.go('tabs.time');
       }
 
       function times(zone, index) {

@@ -1,6 +1,6 @@
 <ion-view view-title="Timezone">
   <ion-nav-buttons side="secondary" >
-    <a ui-sref="tabs.detailed" ng-click="vm.detailed_view()" ng-show="vm.zone_list.length">
+    <a ui-sref="tabs.detailed" ng-click="vm.detailed_view()" ng-show="vm.zone_list.length && vm.title">
       <button class="icon ion-ios-checkmark-outline button button-clear button-outline"></button>
     </a>
   </ion-nav-buttons>
@@ -17,6 +17,12 @@
       <ionic-datepicker input-obj="datepickerObject">
         <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
       </ionic-datepicker>
+    </div>
+    <div class="padding">
+      <h4>Title</h4>
+      <label class="item item-input">
+        <input type="text" ng-model="vm.title">
+      </label>
     </div>
     <div class="padding">
       <h4>Select a Timezone</h4>
