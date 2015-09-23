@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.widgets', 'app.time'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $ionicHistory) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -15,6 +15,10 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+  });
+
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    $ionicHistory.clearCache();
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
@@ -34,7 +38,7 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
     }
   })
   .state('tabs.timedetail', {
-    url   : '/time/:timeId',
+    url   : '/time/detail/:timeId',
     views : {
       'time-tab': {
         templateUrl: 'templates/timedetail.html',
@@ -49,7 +53,7 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
         templateUrl : 'templates/timezone.html',
         controller  : 'TimezoneCtrl as vm',
         resolve     : {
-          init : function($rootScope) {
+          init : function($rootScope, $timeout) {
             $rootScope.datepickerObject = {
               titleLabel: 'Select',  //Optional
               todayLabel: 'Today',  //Optional
