@@ -5,14 +5,16 @@
     .module('app.timezone')
     .controller('TimezoneCtrl', TimezoneCtrl);
 
-    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$ionicPopover'];
+    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover'];
 
-    function TimezoneCtrl($rootScope, $scope, $ionicPopover) {
+    function TimezoneCtrl($rootScope, $scope, $state, $ionicPopover) {
       var vm = this;
 
-      vm.add_zone   = add_zone;
-      vm.on_hold     = on_hold;
-      vm.zone_list  = [];
+      vm.add_zone       = add_zone;
+      vm.detailed_view  = detailed_view;
+      vm.on_hold        = on_hold;
+      vm.save_timezone  = save_timezone;
+      vm.zone_list      = [];
 
       function add_zone(zone) {
         vm.zone_list.push(zone);
@@ -25,9 +27,26 @@
         });
       }
 
+      function detailed_view() {
+        $rootScope.zone_list = vm.zone_list;
+      }
+
+      $scope.moveItem = function(item, itemFromIndex, itemToIndex) {
+        vm.zone_list.splice(itemFromIndex, 1);
+        vm.zone_list.splice(itemToIndex, 0, item);
+      };
+
+      $scope.onItemDelete = function(item) {
+        vm.zone_list.splice(vm.zone_list.indexOf(item), 1);
+      };
+
       function on_hold(zone) {
         console.log(zone);
         vm.showReorder = !vm.showReorder;
+      }
+
+      function save_timezone() {
+
       }
 
       $ionicPopover.fromTemplateUrl('templates/popover_search.html', {

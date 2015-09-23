@@ -59,11 +59,20 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
               // from: new Date(2012, 8, 2),   //Optional
               // to: new Date(2018, 8, 25),    //Optional
               callback: function (val) {    //Mandatory
-                // datePickerCallback(val);
+                $rootScope.datepickerObject.inputDate = new Date(val);
               }
             };
           }
         }
+      }
+    }
+  })
+  .state('tabs.detailed', {
+    url   : '/timezone/detailed',
+    views : {
+      'time-tab': {
+        templateUrl: 'templates/detailed.html',
+        controller : 'DetailedCtrl as vm'
       }
     }
   });

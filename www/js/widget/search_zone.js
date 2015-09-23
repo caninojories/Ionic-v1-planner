@@ -34,6 +34,7 @@
 
           return matches;
         };
+        
         var data = moment.tz.names();
         element.on('input', function() {
             if (element.val() === '') {
