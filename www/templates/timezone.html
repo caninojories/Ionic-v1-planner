@@ -1,4 +1,16 @@
 <ion-view view-title="Timezone">
+  <ion-nav-buttons side="primary" >
+    <a ui-sref="tabs.detailed" ng-click="vm.detailed_view()" ng-show="vm.zone_list.length">
+      <button class="icon ion-ios-checkmark-outline button button-clear button-outline"></button>
+    </a>
+  </ion-nav-buttons>
+
+  <!-- <ion-nav-buttons side="secondary">
+    <a href="#/tab/time/timezone">
+      <button class="icon ion-plus button button-clear button-outline">
+      </button>
+    </a>
+  </ion-nav-buttons> -->
   <ion-content>
     <div class="padding-horizontal">
       <h4>Select a Date</h4>
@@ -6,18 +18,32 @@
         <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
       </ionic-datepicker>
     </div>
-
-    <div class="bar item-input-inset bar-light">
-      <label class="item-input-wrapper">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input on-search type="search" placeholder="Search">
-      </label>
+    <div class="padding">
+      <h4>Select a Timezone</h4>
+      <button ng-click="openPopover($event)" class="button button-assertive button-block icon ion-plus-circled"></button>
     </div>
 
-    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-      <ion-item ng-repeat="zone in data | filter: query" class="item-text-wrap item-icon-right">
-        <span ng-bind-html="zone"></span>
-        <i class="icon ion ion-plus-circled"></i>
+    <div class="row">
+      <div class="col">
+      </div>
+      <div ng-show="vm.showReorder">
+        <button ng-click="vm.showReorder = !vm.showReorder; data.showDelete = false;" class="button button-large button-icon ion-navicon">
+        </button>
+      </div>
+    </div>
+
+    <ion-list show-delete="vm.showDelete" show-reorder="vm.showReorder">
+      <ion-item ng-repeat="zone in vm.zone_list" on-hold="vm.on_hold(zone)">
+        <h2 ng-bind-html="zone"></h2>
+        <ion-option-button class="button-clear button-assertive" ng-click="onItemDelete(zone)">
+          Delete? <i class="ion-checkmark-circled padding-left"></i>
+        </ion-option-button>
+        <!-- <ion-option-button class="button-clear button-positive">
+          <i class="ion-close-circled"></i>
+        </ion-option-button> -->
+
+        <ion-reorder-button class="ion-navicon" on-reorder="moveItem(zone, $fromIndex, $toIndex)">
+        </ion-reorder-button>
       </ion-item>
     </ion-list>
   </ion-content>

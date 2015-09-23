@@ -17,30 +17,24 @@
 
       function link(scope, element, attrs) {
         var substringMatcher = function(q, strs) {
-          // return function findMatches(q, cb) {
-            var matches, substringRegex;
+          var matches, substringRegex;
 
-            // an array that will be populated with substring matches
-            matches = [];
+          matches = [];
 
-            // regex used to determine if a string contains the substring `q`
-            var substrRegex = new RegExp(q, 'i');
+          var substrRegex = new RegExp(q, 'i');
 
-            // iterate through the pool of strings and for any string that
-            // contains the substring `q`, add it to the `matches` array
-            $.each(strs, function(i, str) {
-              if (substrRegex.test(str)) {
-                if (matches.length === 10) {
-                  return matches;
-                }
-                matches.push(str);
+          $.each(strs, function(i, str) {
+            if (substrRegex.test(str)) {
+              if (matches.length === 10) {
+                return matches;
               }
-            });
+              matches.push(str);
+            }
+          });
 
-            return matches;
-            // cb(matches);
-          // };
+          return matches;
         };
+        
         var data = moment.tz.names();
         element.on('input', function() {
             if (element.val() === '') {
