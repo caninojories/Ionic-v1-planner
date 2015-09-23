@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('DetailedCtrl', DetailedCtrl);
 
-    DetailedCtrl.$inject = ['$rootScope', '$scope'];
+    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$window'];
 
-    function DetailedCtrl($rootScope, $scope) {
+    function DetailedCtrl($rootScope, $scope, $state, $window) {
       var vm = this;
 
       vm.choose_time        = choose_time;
@@ -56,6 +56,9 @@
           console.log(vm.zone_list[i].name);
           console.log(vm.zone_list[i].data.item[vm.previous_index].time);
         }
+        
+        window.location.hash = "#/tab/time";
+        location.reload();
       }
 
       function times(zone, index) {
