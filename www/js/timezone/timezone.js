@@ -29,6 +29,7 @@
 
       function detailed_view() {
         $rootScope.zone_list = vm.zone_list;
+        $rootScope.title     = vm.title;
       }
 
       $scope.moveItem = function(item, itemFromIndex, itemToIndex) {
