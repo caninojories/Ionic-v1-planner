@@ -29,6 +29,7 @@
       }
 
       function choose_time(time, item, index) {
+        console.log(index);
         /*check if we have previous click items*/
         if (vm.zone_time_counter === 0) {
           for (var i = 0; i < vm.zone_list.length; i++) {
