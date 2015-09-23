@@ -12,6 +12,7 @@
 
       vm.choose_time        = choose_time;
       vm.previous_index     = null;
+      vm.save_events        = save_events;
       vm.times              = times;
       vm.zone_list          = [];
       vm.zone_time          = [];
@@ -29,7 +30,6 @@
       }
 
       function choose_time(time, item, index) {
-        console.log(index);
         /*check if we have previous click items*/
         if (vm.zone_time_counter === 0) {
           for (var i = 0; i < vm.zone_list.length; i++) {
@@ -48,6 +48,13 @@
           }
 
           vm.previous_index  = index;
+        }
+      }
+
+      function save_events() {
+        for (var i = 0; i < vm.zone_list.length; i++) {
+          console.log(vm.zone_list[i].name);
+          console.log(vm.zone_list[i].data.item[vm.previous_index].time);
         }
       }
 
