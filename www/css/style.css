@@ -23,6 +23,10 @@ ion-scroll > .scroll {
   display: inline-flex;
 }
 
+.orange {
+  background-color: red;
+}
+
 /*Detailed View*/
 /*.detailed .scroll-view {
   display: table-cell !important;
