@@ -18,6 +18,9 @@
       function add_zone(zone) {
         vm.zone_list.push(zone);
         $rootScope.data = '';
+        /*delete the zone that has been click*/
+        var position = $rootScope.data_object.indexOf(zone);
+        $rootScope.data_object.splice(position, 1);
 
         $scope.popover.remove();
         $ionicPopover.fromTemplateUrl('templates/popover_search.html', {
@@ -39,6 +42,7 @@
 
       $scope.onItemDelete = function(item) {
         vm.zone_list.splice(vm.zone_list.indexOf(item), 1);
+        $rootScope.data_object.push(item);
       };
 
       function on_hold(zone) {

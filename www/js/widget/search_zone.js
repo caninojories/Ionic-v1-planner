@@ -13,6 +13,8 @@
         link    : link
       };
 
+      $rootScope.data_object = moment.tz.names();
+
       return directive;
 
       function link(scope, element, attrs) {
@@ -28,25 +30,25 @@
               if (matches.length === 10) {
                 return matches;
               }
+
               matches.push(str);
             }
           });
 
           return matches;
         };
-        
-        var data = moment.tz.names();
+
         element.on('input', function() {
             if (element.val() === '') {
               $timeout(function() {
                 $rootScope.data = [];
               }, 0);
             } else {
-              var dataObject = substringMatcher(element.val(), data);
+              var dataObject = substringMatcher(element.val(), $rootScope.data_object);
               $timeout(function() {
                 $rootScope.data = dataObject;
               }, 0);
-              scope.$broadcast('widget_search_zone_controller_typeahead', dataObject);
+              // scope.$broadcast('widget_search_zone_controller_typeahead', dataObject);
             }
         });
       }
