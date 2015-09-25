@@ -54,12 +54,13 @@
       function save_events() {
         var objToStore = {} ;
         objToStore.timeArray = [] ;
+        objToStore.title = $rootScope.title ;
         for (var i = 0; i < vm.zone_list.length; i++) {
           console.log(vm.zone_list[i].name);
           console.log(vm.zone_list[i].data.item[vm.previous_index].time);
           var event = {} ;
-          event.name = vm.zone_list[i].name ;
-          event.dateandtime = vm.zone_list[i].data.item[vm.previous_index].time ;
+          event.localename = vm.zone_list[i].name ;
+          event.localetime = vm.zone_list[i].data.item[vm.previous_index].time ;
           objToStore.timeArray[i] = event;
         }
         PlannerService.addEvent(objToStore) ;
@@ -68,7 +69,7 @@
           disableAnimate: true,
           disableBack: true
         });
-
+        // PlannerService.getAllEvents().then(function(eventslist){console.log(eventslist)}) ;
         $state.go('tabs.time');
       }
 

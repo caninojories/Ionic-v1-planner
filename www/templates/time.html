@@ -11,16 +11,16 @@
   </ion-nav-buttons>
 
   <ion-content class="has-header">
-    <div class="list card" ng-repeat="item in timedata" ng-click="displayDetail(item.id)">
+    <div class="list card" ng-repeat="item in timedata" ng-click="displayDetail(item._id)">
       <div class="item item-divider item-light">
-        <h3 class="title card-header-upcomming"><i class="ionic ion-clock"> {{item.urgency}}</i></h3>
+        <h3 class="title card-header-upcomming"><i class="ionic ion-clock"> {{item.title}}</i></h3>
       </div>
       <div class="item item-body no-padding">
         <div class="list list-inset no-top-padding no-margin">
           <div class="item no-top-padding">
             <h3>Time: </h3>
-            <ul ng-repeat="locationTime in item.times">
-              <li>Location {{$index + 1}} : {{locationTime}}</li>
+            <ul ng-repeat="locationTime in item.timeArray">
+              <li>Location {{$index + 1}} : {{locationTime.localename}}, {{locationTime.localetime}}</li>
             </ul>
           </div>
         </div>
