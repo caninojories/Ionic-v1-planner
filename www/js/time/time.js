@@ -12,6 +12,7 @@
       PlannerService.initDB() ;
       // Create design doc for key
       var vm = this ;
+      // createDesignDoc("by_urgency", function (doc) {emit(doc.timearray[0].localedate, doc);}) ;
 
       // $http.get('js/data/times.json').success(function(data) {
       //   $scope.timedata = data ;
@@ -29,17 +30,6 @@
       $scope.displayDetail = function(id) {
         $state.go('tabs.timedetail', {timeId: id});
       };
-
-      // Helper function to create design docs to be used in queries
-      // Takes the name of the design doc and the function containing the emit() method
-      function createDesignDoc(name, mapFunction) {
-        var ddoc = {
-          _id: '_design/' + name,
-          views: {}
-        };
-        ddoc.views[name] = { map: mapFunction.toString() };
-        return ddoc;
-      }
 
   }
 }()) ;
