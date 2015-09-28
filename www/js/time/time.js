@@ -12,7 +12,6 @@
       PlannerService.initDB() ;
       var vm = this ;
 
-
       // $http.get('js/data/times.json').success(function(data) {
       //   $scope.timedata = data ;
       //   $scope.timecard = $state.params.timeId ;
@@ -25,6 +24,11 @@
 
       $scope.swipe_left = function() {
         console.log("swiped left") ;
+      }
+
+      $scope.delete_item = function(item) {
+        $scope.timedata.splice($scope.timedata.indexOf(item), 1);
+        PlannerService.deleteEvent(item);
       }
 
       var init = function() {
