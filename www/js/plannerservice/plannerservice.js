@@ -24,7 +24,7 @@
           db = new PouchDB('events', {adapter: 'websql'});
 
           var ddoc = createDesignDoc('by_urgency', function(doc) {
-            emit([doc.urgency, Date.parse(doc.date).getTime()])
+            emit([doc.urgency, Date.parse(doc.date)])
           }) ;
           db.put(ddoc)
             .then(function(){
@@ -46,7 +46,7 @@
       };
 
       function getAllEvents() {
-        if(!events){
+        // if(!events){
           return $q.when(db.query('by_urgency', {
             include_docs: true,
             descending:true
@@ -59,9 +59,9 @@
                        .on('change', onDatabaseChange) ;
             return events ;
           })
-        } else {
-          return $q.when(events) ;
-        }
+        // } else {
+        //   return $q.when(events) ;
+        // }
       }
 
       function addEvent(event) {
