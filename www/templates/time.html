@@ -11,7 +11,7 @@
   </ion-nav-buttons>
 
   <ion-content class="has-header padding">
-    <ion-list class="list-inset padding" ng-repeat="item in timedata" ng-click="displayDetail(item._id)">
+    <ion-list class="list-inset padding" ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
       <!-- <ion-item class="item-divider item-light">
         <h3 class="title card-header-upcomming"><i class="ionic ion-clock"> {{item.urgency}}</i></h3>
       </ion-item> -->
@@ -24,7 +24,7 @@
         <ul ng-repeat="locationTime in item.timeArray">
           <li>Location {{$index + 1}} : {{locationTime.localename}}; {{locationTime.localedate}}, {{locationTime.localetime}}</li>
         </ul>
-        <ion-option-button class="button-clear button-assertive" ng-click="delete_item(item)">
+        <ion-option-button class="button-clear button-assertive" ng-click="vm.deleteItem(item)">
           Delete Meeting? <i class="ion-checkmark-circled padding-left"></i>
         </ion-option-button>
       </ion-item>

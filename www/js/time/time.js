@@ -12,34 +12,30 @@
       PlannerService.initDB() ;
       var vm = this ;
 
-      // $http.get('js/data/times.json').success(function(data) {
-      //   $scope.timedata = data ;
-      //   $scope.timecard = $state.params.timeId ;
-      // });
+      vm.timedata = [];
+      vm.timecard ;
 
+      vm.loadData = loadData ;
+      vm.displayDetail = displayDetail ;
+      vm.deleteItem = deleteItem ;
 
-      $scope.displayDetail = function(id) {
-        $state.go('tabs.timedetail', {timeId: id});
-      };
-
-      $scope.swipe_left = function() {
-        console.log("swiped left") ;
-      }
-
-      $scope.delete_item = function(item) {
-        $scope.timedata.splice($scope.timedata.indexOf(item), 1);
-        PlannerService.deleteEvent(item);
-      }
-
-      var init = function() {
+      function loadData() {
         PlannerService.getAllEvents().then(function(eventslist){
           if (eventslist){
-            console.log(eventslist) ;
-            $scope.timedata = eventslist ;
-            $scope.timecard = $state.params.timeId ;
+            vm.timedata = eventslist ;
+            vm.timecard = $state.params.timeId ;
           }
         }) ;
       }
-      init() ;
+
+      function displayDetail(id) {
+        $state.go('tabs.timedetail', {timeId: id});
+      }
+
+      function deleteItem(item) {
+        PlannerService.deleteEvent(item);
+        loadData();
+      }
+      vm.loadData() ;
   }
 }()) ;

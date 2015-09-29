@@ -4,7 +4,7 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list class="list-inset">
-      <ion-item class="item-text-wrap" ng-repeat="item in timedata | filter: { _id: timecard }">
+      <ion-item class="item-text-wrap" ng-repeat="item in vm.timedata | filter: { _id: vm.timecard }">
         <h3 class="subheader">Title:</h3>
         <h2 class="header">{{item.title}}</h2>
         <br/>
