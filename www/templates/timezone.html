@@ -13,7 +13,7 @@
   </ion-nav-buttons> -->
   <ion-content>
     <div class="padding-horizontal">
-      <h4>Select a Date</h4>
+      <h4>Select a Date {{vm.contacts}}</h4>
       <ionic-datepicker input-obj="datepickerObject">
         <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
       </ionic-datepicker>
