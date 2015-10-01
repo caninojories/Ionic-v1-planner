@@ -4,11 +4,15 @@
 }
 
 .no-padding {
-  padding: 0px;
+  padding: 0px !important;
 }
 
 .no-margin {
   margin: 0px;
+}
+
+.card-header-text {
+  font-size: 16 ;
 }
 
 .card-header-passed {

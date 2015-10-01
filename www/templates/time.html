@@ -11,18 +11,24 @@
   </ion-nav-buttons>
 
   <ion-content class="has-header padding">
-    <ion-list class="list-inset padding" ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
-      <!-- <ion-item class="item-divider item-light">
-        <h3 class="title card-header-upcomming"><i class="ionic ion-clock"> {{item.urgency}}</i></h3>
-      </ion-item> -->
-      <ion-item class="item-text-wrap no-top-padding">
-        <h3 class="title card-header-upcomming"><i class="ionic ion-clock"> {{item.urgency}}</i></h3>
-        <h1>Title: {{item.title}}</h1>
-        <h3>My Location: </h3>
+    <ion-list class="list-inset padding-horizontal padding-bottom" ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
+      <ion-item class="item-text-wrap ">
+        <h1 class="title icon ion-calendar"> {{item.title}}</h1>
+        <h2 class="title card-header-upcomming"> {{item.urgency}}</h2>
+        <!-- <hr class="card-horizintal-rule" /> -->
+        <!-- <h2><b>{{item.title}}</b></h2> -->
+        <br/>
+        <h3 class="icon ion-location"> My Location: </h3>
         <p ng-repeat="myLoc in item.timeArray" ng-show="$index == 0">{{myLoc.localename}}; {{myLoc.localedate}}, {{myLoc.localetime}}</p>
-        <h3>Time: </h3>
-        <ul ng-repeat="locationTime in item.timeArray">
-          <li>Location {{$index + 1}} : {{locationTime.localename}}; {{locationTime.localedate}}, {{locationTime.localetime}}</li>
+        <br/>
+        <h3 class="icon ion-person"> Participants: </h3>
+        <ul ng-repeat="locationTime in item.timeArray" ng-if="$index > 0">
+          <li>
+             <!-- Place participant here -->
+            <p class="icon ion-location">
+              {{locationTime.localename}}; {{locationTime.localedate}}, {{locationTime.localetime}}
+            </p>
+          </li>
         </ul>
         <ion-option-button class="button-clear button-assertive" ng-click="vm.deleteItem(item)">
           Delete Meeting? <i class="ion-checkmark-circled padding-left"></i>
