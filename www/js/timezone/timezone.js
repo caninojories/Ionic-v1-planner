@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('TimezoneCtrl', TimezoneCtrl);
 
-    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$ionicPopover'];
+    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$cordovaContacts', '$ionicPopover'];
 
-    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $ionicPopover) {
+    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $cordovaContacts, $ionicPopover) {
       var vm = this;
 
       vm.add_zone       = add_zone;
