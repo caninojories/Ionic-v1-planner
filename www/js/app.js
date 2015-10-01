@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.widgets', 'app.time'])
+angular.module('starter', ['ionic', 'ngCordova', 'ionic-datepicker', 'app.contacts', 'app.timezone', 'app.widgets', 'app.time'])
 
 .run(function($ionicPlatform, $rootScope, $ionicHistory) {
   $ionicPlatform.ready(function() {
@@ -87,6 +87,15 @@ angular.module('starter', ['ionic', 'ionic-datepicker', 'app.timezone', 'app.wid
       'time-tab': {
         templateUrl: 'templates/detailed.html',
         controller : 'DetailedCtrl as vm'
+      }
+    }
+  })
+  .state('tabs.contacts', {
+    url   : '/contacts',
+    views : {
+      'contacts-tab': {
+        templateUrl: 'templates/contacts.html',
+        controller : 'ContactsCtrl as vm'
       }
     }
   });
