@@ -11,6 +11,10 @@
   margin: 0px;
 }
 
+.no-border {
+  border: 0px ;
+}
+
 .card-header-text {
   font-size: 16 ;
 }

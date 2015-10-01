@@ -21,15 +21,32 @@
         <h3 class="icon ion-location"> My Location: </h3>
         <p ng-repeat="myLoc in item.timeArray" ng-show="$index == 0">{{myLoc.localename}}; {{myLoc.localedate}}, {{myLoc.localetime}}</p>
         <br/>
-        <h3 class="icon ion-person"> Participants: </h3>
-        <ul ng-repeat="locationTime in item.timeArray" ng-if="$index > 0">
+        <h3 class="icon ion-person-stalker"> Participants: </h3>
+        <!-- <ul ng-repeat="locationTime in item.timeArray" ng-if="$index > 0">
           <li>
-             <!-- Place participant here -->
+            <p>
+              <img src="http://www.placehold.it/50x50" alt="contact-photo">
+              Person
+            </p>
             <p class="icon ion-location">
               {{locationTime.localename}}; {{locationTime.localedate}}, {{locationTime.localetime}}
             </p>
           </li>
-        </ul>
+        </ul> -->
+        <ion-list ng-repeat="locationTime in item.timeArray" ng-if="$index > 0">
+          <ion-item class="item-thumbnail-left no-border">
+            <img src="http://www.placehold.it/50x50" alt="contact-photo">
+            <p>
+              Person
+            </p>
+            <p class="icon ion-location">
+              {{locationTime.localename}}
+            </p>
+            <p class="icon ion-clock">
+              {{locationTime.localedate}}, {{locationTime.localetime}}
+            </p>
+          </ion-item>
+        </ion-list>
         <ion-option-button class="button-clear button-assertive" ng-click="vm.deleteItem(item)">
           Delete Meeting? <i class="ion-checkmark-circled padding-left"></i>
         </ion-option-button>
