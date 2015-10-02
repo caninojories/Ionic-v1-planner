@@ -48,7 +48,7 @@
               $timeout(function() {
                 $rootScope.data = dataObject;
               }, 0);
-              // scope.$broadcast('widget_search_zone_controller_typeahead', dataObject);
+              scope.$emit('search_zone_widget_add_location_controller', dataObject);
             }
         });
       }

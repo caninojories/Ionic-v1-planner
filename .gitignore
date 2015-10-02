@@ -8,3 +8,4 @@ plugins/
 lib/
 .io-config.json
 ionic.project
+resources
