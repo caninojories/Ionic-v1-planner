@@ -13,37 +13,44 @@
         initDB: initDB,
 
         getAllEvents : getAllEvents,
-        addEvent : addEvent,
-        updateEvent : updateEvent,
-        deleteEvent : deleteEvent
+        addItem : addItem,
+        updateItem : updateItem,
+        deleteItem : deleteItem
       } ;
 
 
       function initDB() {
           // Creates the database or opens if it already exists
-          db = new PouchDB('events', {adapter: 'websql'});
+          db = new PouchDB('plannerdb', {adapter: 'websql'});
 
-          var ddoc = createDesignDoc('by_urgency', function(doc) {
+          initDesignDoc('by_urgency', function(doc) {
             emit([doc.urgency, Date.parse(doc.date)])
-          }) ;
-          db.put(ddoc)
-            .then(function(){
-              db.query('by_urgency', {limit:0})
-                .then(function(res){
-                  console.log(res) ;
-                })
-                .catch(function (err) {
-                  throw err;
-                })
-            })
-            .catch(function (err) {
-              if (err.status !== 409) {
-                throw err;
-              }
-              // ignore doc if already exists
-            })
+          })
+          // initDesignDoc('by_')
           // db.destroy().then(function() { console.log('ALL YOUR BASE ARE BELONG TO US') });
       };
+
+      function initDesignDoc(ddocName, mapFunc){
+        var ddoc = createDesignDoc('by_urgency', function(doc) {
+          emit([doc.urgency, Date.parse(doc.date)])
+        }) ;
+        db.put(ddoc)
+          .then(function(){
+            db.query('by_urgency', {limit:0})
+              .then(function(res){
+                console.log(res) ;
+              })
+              .catch(function (err) {
+                throw err;
+              })
+          })
+          .catch(function (err) {
+            if (err.status !== 409) {
+              throw err;
+            }
+            // ignore doc if already exists
+          })
+      }
 
       function getAllEvents() {
         // if(!events){
@@ -64,16 +71,16 @@
         // }
       }
 
-      function addEvent(event) {
-        return $q.when(db.post(event));
+      function addItem(item) {
+        return $q.when(db.post(item));
       }
 
-      function updateEvent(event) {
-        return $q.when(db.put(event)) ;
+      function updateItem(item) {
+        return $q.when(db.put(item)) ;
       }
 
-      function deleteEvent(event) {
-        return $q.when(db.remove(event)) ;
+      function deleteItem(item) {
+        return $q.when(db.remove(item)) ;
       }
 
       function onDatabaseChange(change) {

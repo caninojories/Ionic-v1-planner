@@ -33,7 +33,7 @@
       }
 
       function deleteItem(item) {
-        PlannerService.deleteEvent(item);
+        PlannerService.deleteItem(item);
         loadData();
       }
       vm.loadData() ;

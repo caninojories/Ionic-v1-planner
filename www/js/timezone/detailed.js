@@ -74,7 +74,7 @@
           objToStore.urgency = PASSED ;
         }
 
-        PlannerService.addEvent(objToStore) ;
+        PlannerService.addItem(objToStore) ;
 
         $ionicHistory.nextViewOptions({
           disableAnimate: true,
