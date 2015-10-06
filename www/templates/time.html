@@ -15,24 +15,11 @@
       <ion-item class="item-text-wrap ">
         <h1 class="title icon ion-calendar"> {{item.title}}</h1>
         <h2 class="title card-header-upcomming"> {{item.urgency}}</h2>
-        <!-- <hr class="card-horizintal-rule" /> -->
-        <!-- <h2><b>{{item.title}}</b></h2> -->
         <br/>
         <h3 class="icon ion-location"> My Location: </h3>
         <p ng-repeat="myLoc in item.timeArray" ng-show="$index == 0">{{myLoc.localename}}; {{myLoc.localedate}}, {{myLoc.localetime}}</p>
         <br/>
         <h3 class="icon ion-person-stalker"> Participants: </h3>
-        <!-- <ul ng-repeat="locationTime in item.timeArray" ng-if="$index > 0">
-          <li>
-            <p>
-              <img src="http://www.placehold.it/50x50" alt="contact-photo">
-              Person
-            </p>
-            <p class="icon ion-location">
-              {{locationTime.localename}}; {{locationTime.localedate}}, {{locationTime.localetime}}
-            </p>
-          </li>
-        </ul> -->
         <ion-list ng-repeat="locationTime in item.timeArray" ng-if="$index > 0">
           <ion-item class="item-thumbnail-left no-border">
             <img src="http://www.placehold.it/50x50" alt="contact-photo">
