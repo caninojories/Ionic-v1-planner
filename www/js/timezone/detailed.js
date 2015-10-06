@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('DetailedCtrl', DetailedCtrl);
 
-    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$window', '$ionicHistory'];
+    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$window', '$ionicHistory', 'PlannerService'];
 
-    function DetailedCtrl($rootScope, $scope, $state, $window, $ionicHistory) {
+    function DetailedCtrl($rootScope, $scope, $state, $window, $ionicHistory, PlannerService) {
       var vm = this;
 
       vm.choose_time        = choose_time;
@@ -18,6 +18,8 @@
       vm.zone_time          = [];
       vm.zone_time_counter  = 0;
       var date              = moment($rootScope.datepickerObject.inputDate);
+      var UPCOMMING = "Upcomming" ;
+      var PASSED = "Passed" ;
 
       /*make every item an object*/
       object_literal();
@@ -52,16 +54,32 @@
       }
 
       function save_events() {
+        var objToStore = {} ;
+        objToStore.timeArray = [] ;
+        objToStore.title = $rootScope.title ;
+        objToStore.date= date ;
         for (var i = 0; i < vm.zone_list.length; i++) {
-          console.log(vm.zone_list[i].name);
-          console.log(vm.zone_list[i].data.item[vm.previous_index].time);
+          var event = {} ;
+          event.localename = vm.zone_list[i].name ;
+          event.localetime = vm.zone_list[i].data.item[vm.previous_index].time ;
+          event.localedate = vm.zone_list[i].data.item[vm.previous_index].cal ;
+          objToStore.timeArray[i] = event;
         }
+
+        var defaultUTCDate = moment.utc(date) ;
+
+        if (defaultUTCDate > moment.utc()){
+          objToStore.urgency = UPCOMMING ;
+        } else {
+          objToStore.urgency = PASSED ;
+        }
+
+        PlannerService.addItem(objToStore) ;
 
         $ionicHistory.nextViewOptions({
           disableAnimate: true,
           disableBack: true
         });
-
         $state.go('tabs.time');
       }
 
@@ -70,7 +88,7 @@
           for (var i = 0; i < 24; i++) {
             date.hour(i);
             date.minutes(0);
-            zone.data.item.push({time: date.format('HH:mm'), class: false});
+            zone.data.item.push({time: date.format('HH:mm'), class: false, cal: date.format("YYYY-MM-DD")});
           }
         } else {
           for (var j = 0; j < 24; j++) {
@@ -80,7 +98,8 @@
             // date = date.format('YYYY-MM-DD-HH-mm');
             var new_date = moment(date);
             var secondary_date  = new_date.tz(zone.name).format('ha z');
-            zone.data.item.push({time: secondary_date, class: false});
+            var time_date =  new_date.tz(zone.name).format("YYYY-MM-DD");
+            zone.data.item.push({time: secondary_date, class: false, cal : time_date });
           }
         }
       }

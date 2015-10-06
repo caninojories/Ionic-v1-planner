@@ -12,21 +12,28 @@
     </a>
   </ion-nav-buttons> -->
   <ion-content>
-    <div class="padding-horizontal">
-      <h4>Select a Date</h4>
-      <ionic-datepicker input-obj="datepickerObject">
-        <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
-      </ionic-datepicker>
-    </div>
     <div class="padding">
       <h4>Title</h4>
       <label class="item item-input">
         <input type="text" ng-model="vm.title">
       </label>
     </div>
-    <div class="padding">
+    <div class="padding-horizontal">
+      <h4>Select a Date</h4>
+      <ionic-datepicker input-obj="datepickerObject">
+        <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+      </ionic-datepicker>
+    </div>
+    <!-- <div class="padding">
       <h4>Select a Timezone</h4>
       <button ng-click="openPopover($event)" class="button button-assertive button-block icon ion-plus-circled"></button>
+      <p ng-repeat="item in vm.zone_list" ng-show="$index == 0">{{item}}</p>
+    </div> -->
+    <div class="padding">
+      <h4>My Timezone</h4>
+      <label class="item item-input">
+        <input type="text" ng-click="openPopover($event)" ng-model="vm.zone_list[0]" value="vm.zone_list[0]">
+      </label>
     </div>
 
     <div class="row">

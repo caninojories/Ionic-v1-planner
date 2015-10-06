@@ -4,10 +4,13 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list class="list-inset">
-      <ion-item class="item-text-wrap" ng-repeat="item in timedata | filter: { id: timecard }">
+      <ion-item class="item-text-wrap" ng-repeat="item in vm.timedata | filter: { _id: vm.timecard }">
+        <h3 class="subheader">Title:</h3>
+        <h2 class="header">{{item.title}}</h2>
+        <br/>
         <h3>Time: </h3>
-        <ul ng-repeat="locationTime in item.times">
-          <li>Location {{$index + 1}} : {{locationTime}}</li>
+        <ul ng-repeat="locationTime in item.timeArray">
+          <li>Location {{$index + 1}} : {{locationTime.localename}}, {{locationTime.localetime}}</li>
         </ul>
       </ion-item>
     </ion-list>

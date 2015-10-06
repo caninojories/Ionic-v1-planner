@@ -5,18 +5,37 @@
   .module('app.time')
   .controller('TimeCtrl', TimeCtrl) ;
 
-  TimeCtrl.$inject = ['$rootScope', '$scope', '$http', '$state', '$timeout'] ;
+  TimeCtrl.$inject = ['$rootScope', '$scope', '$http', '$state', '$timeout', 'PlannerService'] ;
 
-  function TimeCtrl($rootScope, $scope, $http, $state, $timeout) {
+  function TimeCtrl($rootScope, $scope, $http, $state, $timeout, PlannerService) {
+      // Initialize DB
+      PlannerService.initDB() ;
       var vm = this ;
 
-      $http.get('js/data/times.json').success(function(data) {
-        $scope.timedata = data ;
-        $scope.timecard = $state.params.timeId ;
-      });
+      vm.timedata = [];
+      vm.timecard ;
 
-      $scope.displayDetail = function(id) {
+      vm.loadData = loadData ;
+      vm.displayDetail = displayDetail ;
+      vm.deleteItem = deleteItem ;
+
+      function loadData() {
+        PlannerService.getAllEvents().then(function(eventslist){
+          if (eventslist){
+            vm.timedata = eventslist ;
+            vm.timecard = $state.params.timeId ;
+          }
+        }) ;
+      }
+
+      function displayDetail(id) {
         $state.go('tabs.timedetail', {timeId: id});
-      };
+      }
+
+      function deleteItem(item) {
+        PlannerService.deleteItem(item);
+        loadData();
+      }
+      vm.loadData() ;
   }
 }()) ;
