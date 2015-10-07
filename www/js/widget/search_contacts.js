@@ -32,23 +32,25 @@
           console.log(element.val());
           if (element.val() === '') {
             scope.phoneContacts = [];
-            scope.$emit('search_contacts_widget_add_controller', scope.phoneContacts);
-          }
-          if (isIPad || isIOS || isAndroid || isWindowsPhone) {
-            getContacts();
+            $rootScope.$broadcast('search_contacts_widget_add_controller', scope.phoneContacts);
+          } else {
+            if (isIPad || isIOS || isAndroid || isWindowsPhone) {
+              getContacts();
+            }
           }
         });
 
         function getContacts() {
-          scope.phoneContacts = [];
-
           function onSuccess(contacts) {
+            scope.phoneContacts = [];
+            scope.phoneContacts_ios = [];
             for (var i = 0; i < contacts.length; i++) {
               var contact = contacts[i];
-              scope.phoneContacts.push({displayName: contact.displayName, photos: contact.photos});
+              scope.phoneContacts.push({display_name: contact.name.formatted, photos: contact.photos, emails: contact.emails});
             }
 
-            scope.$emit('search_contacts_widget_add_controller', scope.phoneContacts);
+            scope.$broadcast('search_contacts_widget_add_controller', scope.phoneContacts);
+
           }
 
           function onError(contactError) {
@@ -56,7 +58,8 @@
           }
 
           var opts = {
-            filter : element.val(),
+            filter  : element.val(),
+            fields  : ['name.formatted'],
             multiple: true,
           };
 

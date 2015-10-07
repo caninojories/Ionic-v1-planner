@@ -1,9 +1,9 @@
-<ion-modal-view class="block" ng-controller="AddLocation as vm">
+<ion-modal-view class="block">
   <ion-header-bar>
     <h1 class="title">Add Location</h1>
   </ion-header-bar>
 
-  <ion-content>
+  <ion-content ng-controller="AddLocation as vm">
     <div class="bar item-input-inset bar-light">
       <label class="item-input-wrapper">
         <i class="icon ion-search placeholder-icon"></i>
@@ -14,7 +14,7 @@
     <ion-list>
       <ion-item ng-repeat="zone in vm.zone" class="item-text-wrap item-icon-right">
         <span ng-bind-html="zone"></span>
-        <button class="button button-clear button-assertive icon ion ion-plus-circled" ng-click="vm.add_location()"></button>
+        <button class="button button-clear button-assertive icon ion ion-plus-circled" ng-click="vm.add_location(zone)"></button>
       </ion-item>
     </ion-list>
   </ion-content>

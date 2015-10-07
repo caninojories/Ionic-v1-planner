@@ -48,6 +48,7 @@
               $timeout(function() {
                 $rootScope.data = dataObject;
               }, 0);
+              // scope.$emit('search_zone_widget_timezone_controller', dataObject);
               scope.$emit('search_zone_widget_add_location_controller', dataObject);
             }
         });
