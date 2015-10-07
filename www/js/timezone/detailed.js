@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('DetailedCtrl', DetailedCtrl);
 
-    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$window', '$ionicHistory', 'PlannerService'];
+    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$window', '$ionicHistory', 'PlannerService', 'TimezoneDataService'];
 
-    function DetailedCtrl($rootScope, $scope, $state, $window, $ionicHistory, PlannerService) {
+    function DetailedCtrl($rootScope, $scope, $state, $window, $ionicHistory, PlannerService, timezoneDataService) {
       var vm = this;
 
       vm.choose_time        = choose_time;
@@ -23,13 +23,24 @@
 
       /*make every item an object*/
       object_literal();
-
-      function object_literal() {
-        date.tz($rootScope.zone_list[0]);
-        for (var i = 0; i < $rootScope.zone_list.length; i++) {
-          vm.zone_list.push({name: $rootScope.zone_list[i], data: {item: []}});
+      console.log(timezoneDataService.title);
+      // receive data from timezoneDataService
+      function object_literal(){
+        date.tz(timezoneDataService.myLocation);
+        vm.zone_list.push({name: timezoneDataService.myLocation, data: {item:[]}});
+        for( var i = 0; i < timezoneDataService.participants.length; i++) {
+          vm.zone_list.push({name : timezoneDataService.participants[i].address, data : {item:[]} });
         }
       }
+
+
+
+      // function object_literal() {
+      //   date.tz($rootScope.zone_list[0]);
+      //   for (var i = 0; i < $rootScope.zone_list.length; i++) {
+      //     vm.zone_list.push({name: $rootScope.zone_list[i], data: {item: []}});
+      //   }
+      // }
 
       function choose_time(time, item, index) {
         /*check if we have previous click items*/
@@ -55,15 +66,26 @@
 
       function save_events() {
         var objToStore = {} ;
-        objToStore.timeArray = [] ;
-        objToStore.title = $rootScope.title ;
+        // objToStore.timeArray = [] ;
+        objToStore.participants = [] ;
+        objToStore.myLocale = vm.zone_list[0].name ;
+        objToStore.myTime = vm.zone_list[0].data.item[vm.previous_index].time ;
+        event.localedate = vm.zone_list[0].data.item[vm.previous_index].cal ;
+        objToStore.title = timezoneDataService.title ;
         objToStore.date= date ;
-        for (var i = 0; i < vm.zone_list.length; i++) {
-          var event = {} ;
-          event.localename = vm.zone_list[i].name ;
-          event.localetime = vm.zone_list[i].data.item[vm.previous_index].time ;
-          event.localedate = vm.zone_list[i].data.item[vm.previous_index].cal ;
-          objToStore.timeArray[i] = event;
+        var participantList = timezoneDataService.participants;
+
+        for (var i = 0; i < vm.zone_list.length -1 ; i++) {
+          var participant = {} ;
+          console.log(timezoneDataService.participants[1]);
+          participant.participantname = timezoneDataService.participants[i].display_name;
+          participant.participantlocation= timezoneDataService.participants[i].address;
+          participant.participantEmail = timezoneDataService.participants[i].emails;
+          // participant.participantPhotots here
+          participant.localename = vm.zone_list[i+1].name ;
+          participant.localetime = vm.zone_list[i+1].data.item[vm.previous_index].time ;
+          participant.localedate = vm.zone_list[i+1].data.item[vm.previous_index].cal ;
+          objToStore.participants[i] = participant;
         }
 
         var defaultUTCDate = moment.utc(date) ;
@@ -74,7 +96,9 @@
           objToStore.urgency = PASSED ;
         }
 
-        PlannerService.addItem(objToStore) ;
+        console.log(objToStore);
+
+        // PlannerService.addItem(objToStore) ;
 
         $ionicHistory.nextViewOptions({
           disableAnimate: true,

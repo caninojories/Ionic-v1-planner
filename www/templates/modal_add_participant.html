@@ -1,8 +1,9 @@
-<ion-modal-view class="block" >
+<ion-modal-view class="block"  ng-controller="AddContacts as vm">
   <ion-header-bar>
     <h1 class="title">Contact Search</h1>
+    <button class="button button-clear button-dark" ng-click="vm.hide_add_participant_modal()">Cancel</button>
   </ion-header-bar>
-  <ion-content ng-controller="AddContacts as vm">
+  <ion-content>
     <div class="bar item-input-inset bar-light">
       <label class="item-input-wrapper">
         <i class="icon ion-search placeholder-icon"></i>
