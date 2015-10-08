@@ -70,17 +70,16 @@
         objToStore.participants = [] ;
         objToStore.myLocale = vm.zone_list[0].name ;
         objToStore.myTime = vm.zone_list[0].data.item[vm.previous_index].time ;
-        event.localedate = vm.zone_list[0].data.item[vm.previous_index].cal ;
+        objToStore.myLocaleDate = vm.zone_list[0].data.item[vm.previous_index].cal ;
         objToStore.title = timezoneDataService.title ;
         objToStore.date= date ;
-        var participantList = timezoneDataService.participants;
 
         for (var i = 0; i < vm.zone_list.length -1 ; i++) {
           var participant = {} ;
           console.log(timezoneDataService.participants[1]);
           participant.participantname = timezoneDataService.participants[i].display_name;
-          participant.participantlocation= timezoneDataService.participants[i].address;
-          participant.participantEmail = timezoneDataService.participants[i].emails;
+          // participant.participantlocation= timezoneDataService.participants[i].address;
+          participant.participantemail = timezoneDataService.participants[i].emails;
           // participant.participantPhotots here
           participant.localename = vm.zone_list[i+1].name ;
           participant.localetime = vm.zone_list[i+1].data.item[vm.previous_index].time ;
@@ -98,7 +97,7 @@
 
         console.log(objToStore);
 
-        // PlannerService.addItem(objToStore) ;
+        PlannerService.addItem(objToStore) ;
 
         $ionicHistory.nextViewOptions({
           disableAnimate: true,

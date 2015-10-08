@@ -17,20 +17,23 @@
         <h2 class="title card-header-upcomming"> {{item.urgency}}</h2>
         <br/>
         <h3 class="icon ion-location"> My Location: </h3>
-        <p ng-repeat="myLoc in item.timeArray" ng-show="$index == 0">{{myLoc.localename}}; {{myLoc.localedate}}, {{myLoc.localetime}}</p>
+        <p >{{item.myLocale}}; {{item.myLocaleDate}}, {{item.myTime}}</p>
         <br/>
         <h3 class="icon ion-person-stalker"> Participants: </h3>
-        <ion-list ng-repeat="locationTime in item.timeArray" ng-if="$index > 0">
+        <ion-list ng-repeat="participant in item.participants">
           <ion-item class="item-thumbnail-left no-border">
             <img src="http://www.placehold.it/50x50" alt="contact-photo">
             <p>
-              Person
+              {{participant.participantname}}
             </p>
             <p class="icon ion-location">
-              {{locationTime.localename}}
+              {{participant.localename}}
             </p>
             <p class="icon ion-clock">
-              {{locationTime.localedate}}, {{locationTime.localetime}}
+              {{participant.localedate}}, {{participant.localetime}}
+            </p>
+            <p class="icon ion-email">
+              {{participant.participantemail}}
             </p>
           </ion-item>
         </ion-list>
