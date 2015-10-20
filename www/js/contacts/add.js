@@ -5,9 +5,9 @@
     .module('app.contacts')
     .controller('AddContacts', AddContacts);
 
-  AddContacts.$inject = ['$rootScope', '$scope', '$cordovaContacts', '$ionicPopover', '$ionicModal'];
+  AddContacts.$inject = ['$rootScope', '$scope', '$timeout', '$cordovaContacts', '$ionicPopover', '$ionicModal'];
 
-  function AddContacts($rootScope, $scope, $cordovaContacts, $ionicPopover, $ionicModal) {
+  function AddContacts($rootScope, $scope, $timeout, $cordovaContacts, $ionicPopover, $ionicModal) {
     var vm = this;
 
     // vm.add_contact  = add_contact;
@@ -15,7 +15,10 @@
     vm.show_add_location_modal = show_add_location_modal;
 
     $scope.$on('search_contacts_widget_add_controller', function(event, data) {
-      vm.contacts = data;
+      console.log(data);
+      $timeout(function() {
+        vm.contacts = data;
+      }, 10);
     });
 
     $ionicModal.fromTemplateUrl('templates/popover_add_location.html', {

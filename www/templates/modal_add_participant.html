@@ -11,7 +11,7 @@
     </div>
 
     <!-- {{vm.contacts_ios}} jories -->
-    <ion-list ng-show="vm.contacts.length">
+    <ion-list>
       <ion-item ng-repeat="contact in vm.contacts" class="item-text-wrap item-icon-right">
         <h5>{{contact.display_name}}</h5>
         <button class="button button-clear button-assertive icon ion ion-plus-circled" ng-click="vm.add_participant(contact)"></button>

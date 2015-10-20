@@ -5,16 +5,18 @@
     .module('app.contacts')
     .controller('AddLocation', AddLocation);
 
-  AddLocation.$inject = ['$rootScope', '$scope', '$cordovaContacts', '$ionicPopover'];
+  AddLocation.$inject = ['$rootScope', '$scope', '$timeout', '$cordovaContacts', '$ionicPopover'];
 
-  function AddLocation($rootScope, $scope, $cordovaContacts, $ionicPopover) {
+  function AddLocation($rootScope, $scope, $timeout, $cordovaContacts, $ionicPopover) {
     var vm = this;
 
     vm.add_location             = add_location;
     vm.add_participant_location = add_participant_location;
 
     $scope.$on('search_zone_widget_add_location_controller', function(event, zone) {
-      vm.zone = zone;
+      $timeout(function () {
+        vm.zone = zone;
+      }, 10);
     });
 
     function add_location(zone) {
