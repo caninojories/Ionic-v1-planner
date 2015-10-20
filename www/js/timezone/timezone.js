@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('TimezoneCtrl', TimezoneCtrl);
 
-    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$cordovaContacts', '$ionicPopover', '$ionicModal'];
+    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$cordovaContacts', '$ionicPopover', '$ionicModal', 'TimezoneDataService'];
 
-    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $cordovaContacts, $ionicPopover, $ionicModal) {
+    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $cordovaContacts, $ionicPopover, $ionicModal, timezoneDataService) {
       var vm = this;
 
       vm.participants     = [];
@@ -37,6 +37,15 @@
         vm.participants[vm.participant_index].photos       = participant.photos;
       });
 
+      $scope.$on('add_controller_timezone_controller_cancel', function(){
+        vm.participants_modal.hide();
+      })
+
+      $scope.$on('add_location_controller_timezone_controller_cancel', function(){
+        vm.participant_location_modal.hide();
+        vm.my_location_modal.hide();
+      })
+
       function add_partcipants() {
         vm.participants.push({display_name: '', address: '', emails: '', photos: ''});
       }
@@ -54,8 +63,9 @@
       }
 
       function detailed_view() {
-        $rootScope.zone_list = vm.zone_list;
-        $rootScope.title     = vm.title;
+        timezoneDataService.title =  vm.title;
+        timezoneDataService.myLocation = vm.my_timezone;
+        timezoneDataService.participants = vm.participants;
       }
 
       $ionicModal.fromTemplateUrl('templates/modal_add_participant.html', {

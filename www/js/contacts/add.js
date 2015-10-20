@@ -13,6 +13,7 @@
     // vm.add_contact  = add_contact;
     vm.add_participant = add_participant;
     vm.show_add_location_modal = show_add_location_modal;
+    vm.hide_add_participant_modal = hide_add_participant_modal;
 
     $scope.$on('search_contacts_widget_add_controller', function(event, data) {
       console.log(data);
@@ -30,6 +31,11 @@
 
     function show_add_location_modal() {
       vm.add_location_modal.show();
+    }
+
+    function hide_add_participant_modal(){
+      console.log("elo") ;
+      $rootScope.$broadcast('add_controller_timezone_controller_cancel');
     }
 
     function add_participant(participant) {
