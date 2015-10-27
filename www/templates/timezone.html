@@ -32,7 +32,7 @@
     <div class="padding">
       <h4>My Timezone</h4>
       <label class="item item-input">
-        <input on-search type="text" ng-click="vm.open_my_location_modal($event)" ng-model="vm.my_timezone">
+        <input type="text" ng-click="vm.open_my_location_modal($event)" ng-model="vm.my_timezone">
       </label>
     </div>
 
@@ -48,20 +48,22 @@
     <ion-list show-delete="vm.showDelete" show-reorder="vm.showReorder">
       <h4>Participants</h4>
       <ion-item ng-repeat="participant in vm.participants" on-hold="vm.on_hold(zone)">
-        <h4>Name: </h4>
-        <label class="item item-input">
-          <input search-contacts ng-click="vm.open_participants_modal($event, $index)" type="text" ng-model="participant.display_name">
-        </label>
-        <div class="location">
+        <div class="name padding-left">
+          <h4>Name: </h4>
+          <label class="item item-input">
+            <input class="button-block" ng-click="vm.open_participants_modal($event, $index)" type="text" ng-model="participant.display_name">
+          </label>
+        </div>
+        <div class="location padding-left">
           <h4>Location: </h4>
           <label class="item item-input">
             <input search-contacts ng-click="vm.open_participant_location_modal($event, $index)" type="text" ng-model="participant.address">
           </label>
         </div>
-        <div class="email">
+        <div class="email padding-left">
           <h4>Email: </h4>
           <label class="item item-input">
-            <input type="text" ng-model="participant.emails">
+            <input class="button-block" type="text" ng-model="participant.emails">
           </label>
         </div>
         <ion-option-button class="button-clear button-assertive" ng-click="onItemDelete(participant)">
@@ -74,6 +76,7 @@
 
     <div class="padding">
       <button ng-click="vm.add_partcipants()" class="button button-block button-positive icon ion ion-plus-circled"> Add</button>
+      <button ng-click="vm.send_email()" class="button button-block button-positive icon ion ion-plus-circled"> Send Email</button>
     </div>
   </ion-content>
 </ion-view>

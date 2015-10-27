@@ -16,6 +16,11 @@
       return directive;
 
       function link(scope, element, attrs) {
+        scope.$on('addContactsControllerIntoSearchZoneWidget', function() {
+          console.log('contacts');
+          element.val('');
+        });
+
         var isIPad,
             isIOS,
             isAndroid,
@@ -29,7 +34,6 @@
         });
 
         element.on('input', function() {
-          console.log(element.val());
           if (element.val() === '') {
             scope.phoneContacts = [];
             $rootScope.$broadcast('search_contacts_widget_add_controller', scope.phoneContacts);
@@ -46,10 +50,12 @@
             scope.phoneContacts_ios = [];
             for (var i = 0; i < contacts.length; i++) {
               var contact = contacts[i];
+              console.log(contact);
               scope.phoneContacts.push({display_name: contact.name.formatted, photos: contact.photos, emails: contact.emails});
             }
 
-            scope.$broadcast('search_contacts_widget_add_controller', scope.phoneContacts);
+            console.log(scope.phoneContacts);
+            scope.$emit('search_contacts_widget_add_controller', scope.phoneContacts);
 
           }
 

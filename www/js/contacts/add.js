@@ -40,6 +40,8 @@
 
     function add_participant(participant) {
       $rootScope.$broadcast('add_controller_timezone_controller', participant);
+      $scope.$broadcast('addContactsControllerIntoSearchZoneWidget');
+      vm.contacts = [];
     }
   }
 }());

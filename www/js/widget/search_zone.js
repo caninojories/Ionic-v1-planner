@@ -10,6 +10,7 @@
     function onSearch($rootScope, $timeout) {
       var directive = {
         restrict: 'A',
+        scope   : {},
         link    : link
       };
 
@@ -18,6 +19,18 @@
       return directive;
 
       function link(scope, element, attrs) {
+        // scope.$on('timezoneControllerIntoSearchZoneWidget', function(event, data) {
+        //   $timeout(function() {
+        //     console.log(element);
+        //     element[0].focus();
+        //   }, 750);
+        // });
+
+        scope.$on('addLocationControllerIntoSearchZoneWidget', function() {
+          console.log('location');
+          element.val('');
+        });
+
         var substringMatcher = function(q, strs) {
           var matches, substringRegex;
 

@@ -5,20 +5,52 @@
     .module('app.timezone')
     .controller('TimezoneCtrl', TimezoneCtrl);
 
-    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$cordovaContacts', '$ionicPopover', '$ionicModal', 'TimezoneDataService'];
+    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$cordovaContacts', '$cordovaEmailComposer', '$ionicPopover', '$ionicModal', 'TimezoneDataService'];
 
-    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $cordovaContacts, $ionicPopover, $ionicModal, timezoneDataService) {
+    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $cordovaContacts, $cordovaEmailComposer, $ionicPopover, $ionicModal, timezoneDataService) {
       var vm = this;
 
-      vm.participants     = [];
+      vm.participants                     = [];
 
-      vm.add_zone                         = add_zone;
       vm.add_partcipants                  = add_partcipants;
       vm.detailed_view                    = detailed_view;
       vm.on_hold                          = on_hold;
       vm.open_participants_modal          = open_participants_modal;
       vm.open_my_location_modal           = open_my_location_modal;
       vm.open_participant_location_modal  = open_participant_location_modal;
+
+      // vm.send_email   = send_email;
+      //
+      // $cordovaEmailComposer.isAvailable().then(function() {
+      //   console.log('available');
+      // }, function () {
+      //   console.log('not available');
+      // });
+      //
+      // function send_email() {
+      //   var contacts = [];
+      //   /*get the participants*/
+      //   vm.participants.forEach(function(participant) {
+      //     contacts.push(participant.emails);
+      //   });
+      //
+      //   var email = {
+      //     to: contacts,
+      //     cc: '',
+      //     bcc: [],
+      //     attachments: [
+      //       cordova.file.externalRootDirectory + 'new_file1.ics'
+      //     ],
+      //     subject: '',
+      //     body: '',
+      //     isHtml: true
+      //   };
+      //
+      //   $cordovaEmailComposer.open(email).then(null, function (data) {
+      //     console.log(data);
+      //   });
+      // }
+
 
       $scope.$on('add_location_controller_timezone_controller_for_my_location', function(event, zone) {
         vm.my_timezone = zone;
@@ -39,28 +71,28 @@
 
       $scope.$on('add_controller_timezone_controller_cancel', function(){
         vm.participants_modal.hide();
-      })
+      });
 
       $scope.$on('add_location_controller_timezone_controller_cancel', function(){
         vm.participant_location_modal.hide();
         vm.my_location_modal.hide();
-      })
+      });
 
       function add_partcipants() {
         vm.participants.push({display_name: '', address: '', emails: '', photos: ''});
       }
 
-      function add_zone(zone) {
-        vm.zone = zone;
-
-        $scope.popover.remove();
-        $ionicModal.fromTemplateUrl('templates/popover_search.html', {
-          vm: vm,
-          animation: 'slide-in-up'
-        }).then(function(popover) {
-          vm.my_location_modal = popover;
-        });
-      }
+      // function add_zone(zone) {
+      //   vm.zone = zone;
+      //
+      //   $scope.popover.remove();
+      //   $ionicModal.fromTemplateUrl('templates/popover_search.html', {
+      //     vm: vm,
+      //     animation: 'slide-in-up'
+      //   }).then(function(popover) {
+      //     vm.my_location_modal = popover;
+      //   });
+      // }
 
       function detailed_view() {
         timezoneDataService.title =  vm.title;
@@ -70,28 +102,32 @@
 
       $ionicModal.fromTemplateUrl('templates/modal_add_participant.html', {
         vm: vm,
-        animation: 'slide-in-up'
+        animation: 'slide-in-up',
+        focusFirstInput: true,
       }).then(function(modal) {
         vm.participants_modal = modal;
       });
 
       $ionicModal.fromTemplateUrl('templates/modal_my_location.html', {
         vm: vm,
-        animation: 'slide-in-up'
+        animation: 'slide-in-up',
+        focusFirstInput: true,
       }).then(function(modal) {
         vm.my_location_modal = modal;
       });
 
       $ionicModal.fromTemplateUrl('templates/modal_participant_location.html', {
         vm: vm,
-        animation: 'slide-in-up'
+        animation: 'slide-in-up',
+        focusFirstInput: true,
       }).then(function(modal) {
         vm.participant_location_modal = modal;
       });
 
       $ionicModal.fromTemplateUrl('templates/modal_add_location.html', {
         vm: vm,
-        animation: 'slide-in-up'
+        animation: 'slide-in-up',
+        focusFirstInput: true,
       }).then(function(modal) {
         vm.participant_location_modal = modal;
       });
@@ -129,21 +165,5 @@
         vm.participant_index = $index;
         vm.participant_location_modal.show($event);
       }
-
-      $scope.closePopover = function() {
-        $scope.popover.hide();
-      };
-      //Cleanup the popover when we're done with it!
-      $scope.$on('$destroy', function() {
-        $scope.popover.remove();
-      });
-      // Execute action on hide popover
-      $scope.$on('popover.hidden', function() {
-        // Execute action
-      });
-      // Execute action on remove popover
-      $scope.$on('popover.removed', function() {
-        // Execute action
-      });
     }
 }());
