@@ -67,15 +67,6 @@
         }
       }
 
-
-
-      // function object_literal() {
-      //   date.tz($rootScope.zone_list[0]);
-      //   for (var i = 0; i < $rootScope.zone_list.length; i++) {
-      //     vm.zone_list.push({name: $rootScope.zone_list[i], data: {item: []}});
-      //   }
-      // }
-
       function choose_time(time, item, index) {
         /*check if we have previous click items*/
         if (vm.zone_time_counter === 0) {
@@ -129,18 +120,20 @@
           objToStore.urgency = PASSED ;
         }
 
-        // PlannerService.addItem(objToStore);
+        PlannerService.addItem(objToStore);
 
         /*attachement email*/
         var participants = objToStore.participants;
-        icsSetup(objToStore.myLocaleDate, objToStore.myTime, objToStore.myLocale);
-        send_email(participants);
+        // if(participants.length !=0){
+          icsSetup(objToStore.myLocaleDate, objToStore.myTime, objToStore.myLocale);
+          send_email(participants);
+        // }
 
-        // $ionicHistory.nextViewOptions({
-        //   disableAnimate: true,
-        //   disableBack: true
-        // });
-        // $state.go('tabs.time');
+        $ionicHistory.nextViewOptions({
+          disableAnimate: true,
+          disableBack: true
+        });
+        $state.go('tabs.time');
       }
 
       function times(zone, index) {
