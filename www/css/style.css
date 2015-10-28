@@ -35,3 +35,24 @@
 .detailed > ion-content > .scroll {
   display: inline-flex;
 }
+
+/* Custom app-wide colors */
+.bar-assertive, .tabs-assertive > .tabs {
+  background-color: #D53D01 !important;
+}
+
+.app-background {
+  background-color: #FAFAFA !important;
+}
+
+.planner-icon {
+  color: #A73000 !important;
+}
+
+.planner_form-text-xl {
+  font-size: 2rem;
+}
+
+.planner_form-text-l {
+  font-size: 1.5rem;
+}

@@ -12,6 +12,23 @@
     </a>
   </ion-nav-buttons> -->
   <ion-content>
+    <div class="list">
+      <label class="item item-input item-floating-label">
+        <span class="input-label planner_form-text-xl" ng-show="vm.title">Title</span>
+        <input type="text" placeholder="Title" ng-model="vm.title">
+      </label>
+      <label class="item item-input-inset item-stacked-label">
+        <span class="input-label planner_form-text-l">Select a Date</span>
+        <ionic-datepicker input-obj="datepickerObject" force-ripple>
+          <button class="button button-block button-outline button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+        </ionic-datepicker>
+      </label>
+      <label class="item item-input-inset item-stacked-label">
+        <span class="input-label planner_form-text-l">My Timezone</span>
+        <input type="text" ng-click="vm.open_my_location_modal($event)" ng-model="vm.my_timezone">
+      </label>
+    </div>
+
     <div class="padding">
       <h4>Title</h4>
       <label class="item item-input">
