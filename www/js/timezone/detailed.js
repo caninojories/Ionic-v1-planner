@@ -43,7 +43,7 @@
           cc: '',
           bcc: [],
           attachments: [
-            cordova.file.externalRootDirectory + 'appointment.ics'
+            cordova.file.dataDirectory + 'appointment.ics'
           ],
           subject: '',
           body: '',
@@ -124,10 +124,10 @@
 
         /*attachement email*/
         var participants = objToStore.participants;
-        // if(participants.length !=0){
+        if(participants.length !=0){
           icsSetup(objToStore.myLocaleDate, objToStore.myTime, objToStore.myLocale);
           send_email(participants);
-        // }
+        }
 
         $ionicHistory.nextViewOptions({
           disableAnimate: true,
@@ -173,7 +173,8 @@
         ical[6] = 'DTEND;TZID=' + locale + ':' + start + 'T' + n(startTime) + '0000';
 
         // document.addEventListener('deviceready', function() {
-          $cordovaFile.writeFile(cordova.file.externalRootDirectory, 'appointment.ics', ical.join('\n'), true)
+        var filePath = cordova.file.dataDirectory ;// ? cordova.file.externalRootDirectory : cordova.file.dataDirectory;
+          $cordovaFile.writeFile(filePath, 'appointment.ics', ical.join('\n'), true)
           .then(function (success) {
             console.log(success);
           }, function (error) {
