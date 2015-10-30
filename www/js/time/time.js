@@ -29,7 +29,10 @@
       }
 
       function displayDetail(id) {
-        $state.go('tabs.timedetail', {timeId: id});
+        // id, myLocale, myLocaleDate, myTime,participants, title
+        $state.go('tabs.timezone', {
+          timeId: id
+        });
       }
 
       function deleteItem(item) {

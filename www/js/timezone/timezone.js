@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('TimezoneCtrl', TimezoneCtrl);
 
-    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$cordovaContacts', '$cordovaEmailComposer', '$ionicPopover', '$ionicModal', 'TimezoneDataService'];
+    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$stateParams', '$cordovaContacts', '$cordovaEmailComposer', '$ionicPopover', '$ionicModal', 'TimezoneDataService', 'PlannerService'];
 
-    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $cordovaContacts, $cordovaEmailComposer, $ionicPopover, $ionicModal, timezoneDataService) {
+    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $stateParams, $cordovaContacts, $cordovaEmailComposer, $ionicPopover, $ionicModal, timezoneDataService, PlannerService) {
       var vm = this;
 
       vm.participants                     = [];
@@ -18,6 +18,26 @@
       vm.open_participants_modal          = open_participants_modal;
       vm.open_my_location_modal           = open_my_location_modal;
       vm.open_participant_location_modal  = open_participant_location_modal;
+
+      $scope.$on('$ionicView.loaded', function(){
+        if($stateParams.timeId){
+          PlannerService.getItem($stateParams.timeId).then(function(event){
+            console.log(event)
+            vm.title = event.title;
+            vm.my_timezone = event.myLocale;
+            $rootScope.datepickerObject.inputDate = event.myLocaleDate;
+            if(event.participants){
+              event.participants.forEach(function(participant){
+                add_partcipants(
+                  participant.participantname,
+                  participant.localename,
+                  participant.participantemail,
+                  participant.photo)
+              })
+            }
+          });
+        }
+      });
 
       // vm.send_email   = send_email;
       //
@@ -78,8 +98,13 @@
         vm.my_location_modal.hide();
       });
 
-      function add_partcipants() {
-        vm.participants.push({display_name: '', address: '', emails: '', photos: ''});
+      function add_partcipants(name, addr, email, photo) {
+        vm.participants.push({
+          display_name: name?name:'',
+          address: addr?addr:'',
+          emails: email?email:'',
+          photos: photo?photo:''
+        });
       }
 
       // function add_zone(zone) {

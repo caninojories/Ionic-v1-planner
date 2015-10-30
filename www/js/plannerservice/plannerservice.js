@@ -12,10 +12,11 @@
       return {
         initDB: initDB,
 
-        getAllEvents : getAllEvents,
-        addItem : addItem,
-        updateItem : updateItem,
-        deleteItem : deleteItem
+        getItem       : getItem,
+        getAllEvents  : getAllEvents,
+        addItem       : addItem,
+        updateItem    : updateItem,
+        deleteItem    : deleteItem
       } ;
 
 
@@ -26,6 +27,10 @@
           initDesignDoc('by_urgency', function(doc) {
             emit([doc.urgency, Date.parse(doc.date)])
           })
+
+          // initDesignDoc('by_id', function(doc){
+          //   emit(doc._id);
+          // })
           // initDesignDoc('by_')
           // db.destroy().then(function() { console.log('ALL YOUR BASE ARE BELONG TO US') });
       };
@@ -69,6 +74,10 @@
         // } else {
         //   return $q.when(events) ;
         // }
+      }
+
+      function getItem(id){
+        return $q.when(db.get(id));
       }
 
       function addItem(item) {

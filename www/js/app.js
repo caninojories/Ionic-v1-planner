@@ -38,16 +38,19 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic-datepicker', 'app.contac
     }
   })
   .state('tabs.timedetail', {
-    url   : '/time/detail/:timeId',
+    url   : '/time/detail',
     views : {
       'time-tab': {
         templateUrl: 'templates/timedetail.html',
         controller: 'TimeCtrl as vm'
       }
+    },
+    params  : {
+      timeId  : null
     }
   })
   .state('tabs.timezone', {
-    url   : '/time/timezone',
+    url   : '/time/timezone/?timeId&myLocale&myLocaleDate&myTime&participants&title',
     views : {
       'time-tab': {
         templateUrl : 'templates/timezone.html',
