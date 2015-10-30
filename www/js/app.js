@@ -35,15 +35,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic-datepicker', 'app.contac
         templateUrl: 'templates/time.html',
         controller: 'TimeCtrl as vm'
       }
-    }
-  })
-  .state('tabs.timedetail', {
-    url   : '/time/detail',
-    views : {
-      'time-tab': {
-        templateUrl: 'templates/timedetail.html',
-        controller: 'TimeCtrl as vm'
-      }
     },
     params  : {
       timeId  : null
