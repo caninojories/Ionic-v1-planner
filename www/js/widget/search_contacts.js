@@ -16,8 +16,8 @@
       return directive;
 
       function link(scope, element, attrs) {
+        checkOfDevice();
         scope.$on('addContactsControllerIntoSearchZoneWidget', function() {
-          console.log('contacts');
           element.val('');
         });
 
@@ -34,6 +34,10 @@
         });
 
         element.on('input', function() {
+          checkOfDevice();
+        });
+
+        function checkOfDevice() {
           if (element.val() === '') {
             scope.phoneContacts = [];
             $rootScope.$broadcast('search_contacts_widget_add_controller', scope.phoneContacts);
@@ -42,21 +46,20 @@
               getContacts();
             }
           }
-        });
+        }
 
         function getContacts() {
           function onSuccess(contacts) {
             scope.phoneContacts = [];
             scope.phoneContacts_ios = [];
             for (var i = 0; i < contacts.length; i++) {
+              if (i === 10) {return;}
               var contact = contacts[i];
-              console.log(contact);
               scope.phoneContacts.push({display_name: contact.name.formatted, photos: contact.photos, emails: contact.emails});
+
             }
 
-            console.log(scope.phoneContacts);
             scope.$emit('search_contacts_widget_add_controller', scope.phoneContacts);
-
           }
 
           function onError(contactError) {

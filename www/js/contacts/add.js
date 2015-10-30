@@ -16,7 +16,6 @@
     vm.hide_add_participant_modal = hide_add_participant_modal;
 
     $scope.$on('search_contacts_widget_add_controller', function(event, data) {
-      console.log(data);
       $timeout(function() {
         vm.contacts = data;
       }, 10);
