@@ -29,7 +29,7 @@
             $rootScope.datepickerObject.inputDate = event.myLocaleDate;
             if(event.participants){
               event.participants.forEach(function(participant){
-                add_partcipants(
+                populateParticipantList(
                   participant.participantname,
                   participant.localename,
                   participant.participantemail,
@@ -99,16 +99,18 @@
         vm.my_location_modal.hide();
       });
 
-      function add_partcipants(name, addr, email, photo) {
-        vm.participants.push({
-          display_name: name?name:'',
-          address: addr?addr:'',
-          emails: email?email:'',
-          photos: photo?photo:''
-        });
-        if(!$stateParams.timeId){
-          $ionicScrollDelegate.scrollBottom();
-        }
+      function add_partcipants() {
+        vm.participants.push({display_name: '', address: '', emails: '', photos: ''});
+        $ionicScrollDelegate.scrollBottom();
+      }
+
+      function populateParticipantList(name, addr, email, photo){
+          vm.participants.push({
+            display_name: name?name:'',
+            address: addr?addr:'',
+            emails: email?email:'',
+            photos: photo?photo:''
+          });
       }
 
       // function add_zone(zone) {
