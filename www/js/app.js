@@ -21,7 +21,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic-datepicker', 'app.contac
     $ionicHistory.clearCache();
   });
 })
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  $ionicConfigProvider.backButton.previousTitleText(false);
   $stateProvider
   // .state('tabs', {
   //   url         : '/tab',

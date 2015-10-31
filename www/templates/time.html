@@ -1,5 +1,5 @@
-<ion-view view-title="Time">
-  <ion-nav-buttons side="primary">
+<ion-view view-title="{{vm.todayDate | date:'dd - MMMM - yyyy'}}" >
+  <!-- <ion-nav-buttons side="primary">
     <button class="icon ion-gear-a button button-clear button-outline"></button>
   </ion-nav-buttons>
 
@@ -8,9 +8,9 @@
       <button class="icon ion-plus button button-clear button-outline">
       </button>
     </a>
-  </ion-nav-buttons>
+  </ion-nav-buttons> -->
 
-  <ion-content class="has-header padding">
+  <ion-content class="has-header padding app-background">
     <ion-list class="list-inset padding-horizontal padding-bottom" ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
       <ion-item class="item-text-wrap ">
         <h1 class="title icon ion-calendar planner-icon"> {{item.title}}</h1>
@@ -43,4 +43,10 @@
       </ion-item>
     </ion-list>
   </ion-content>
+
+  <div class="bar bar-footer bar-assertive">
+    <div class="button-bar">
+      <a  ui-sref="timezone" class="icon ion-plus button button-clear button-outline"></a>
+    </div>
+  </div>
 </ion-view>

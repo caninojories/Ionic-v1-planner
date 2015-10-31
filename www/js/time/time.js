@@ -14,10 +14,15 @@
 
       vm.timedata = [];
       vm.timecard = null;
+      vm.todayDate = null;
 
       vm.loadData = loadData ;
       vm.displayDetail = displayDetail ;
       vm.deleteItem = deleteItem ;
+
+      $scope.$on("$ionicView.enter", function(){
+        vm.todayDate = new Date();
+      })
 
       function loadData() {
         PlannerService.getAllEvents().then(function(eventslist){
