@@ -23,76 +23,108 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic-datepicker', 'app.contac
 })
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-  .state('tabs', {
-    url         : '/tab',
-    abstract    : true,
-    templateUrl : 'templates/tabs.html'
-  })
-  .state('tabs.time', {
+  // .state('tabs', {
+  //   url         : '/tab',
+  //   abstract    : true,
+  //   templateUrl : 'templates/tabs.html'
+  // })
+  .state('time', {
     url   : '/time',
-    views : {
-      'time-tab': {
-        templateUrl: 'templates/time.html',
-        controller: 'TimeCtrl as vm'
-      }
-    },
+    templateUrl: 'templates/time.html',
+    controller: 'TimeCtrl as vm',
+    // views : {
+    //   'time-tab': {
+    //     templateUrl: 'templates/time.html',
+    //     controller: 'TimeCtrl as vm'
+    //   }
+    // },
     params  : {
       timeId  : null
     }
   })
-  .state('tabs.timezone', {
-    url   : '/time/timezone/?timeId&myLocale&myLocaleDate&myTime&participants&title',
-    views : {
-      'time-tab': {
-        templateUrl : 'templates/timezone.html',
-        controller  : 'TimezoneCtrl as vm',
-        resolve     : {
-          init : function($rootScope, $timeout) {
-            $rootScope.datepickerObject = {
-              titleLabel: 'Select',  //Optional
-              todayLabel: 'Today',  //Optional
-              closeLabel: 'Close',  //Optional
-              setLabel: 'Set',  //Optional
-              setButtonType   : 'button-assertive',  //Optional
-              todayButtonType : 'button-assertive',  //Optional
-              closeButtonType : 'button-assertive',  //Optional
-              inputDate: new Date(),    //Optional
-              // mondayFirst: true,    //Optional
-              // disabledDates: disabledDates, //Optional
-              // weekDaysList: weekDaysList,   //Optional
-              // monthList: monthList, //Optional
-              // templateType: 'popup', //Optional
-              modalHeaderColor: 'bar-assertive', //Optional
-              modalFooterColor: 'bar-assertive', //Optional
-              // from: new Date(2012, 8, 2),   //Optional
-              // to: new Date(2018, 8, 25),    //Optional
-              callback: function (val) {    //Mandatory
-                $rootScope.datepickerObject.inputDate = new Date(val);
-              }
-            };
+  .state('timezone', {
+    url   : '/time/timezone/?timeId',
+    templateUrl : 'templates/timezone.html',
+    controller  : 'TimezoneCtrl as vm',
+    resolve     : {
+      init : function($rootScope, $timeout) {
+        $rootScope.datepickerObject = {
+          titleLabel: 'Select',  //Optional
+          todayLabel: 'Today',  //Optional
+          closeLabel: 'Close',  //Optional
+          setLabel: 'Set',  //Optional
+          setButtonType   : 'button-assertive',  //Optional
+          todayButtonType : 'button-assertive',  //Optional
+          closeButtonType : 'button-assertive',  //Optional
+          inputDate: new Date(),    //Optional
+          // mondayFirst: true,    //Optional
+          // disabledDates: disabledDates, //Optional
+          // weekDaysList: weekDaysList,   //Optional
+          // monthList: monthList, //Optional
+          // templateType: 'popup', //Optional
+          modalHeaderColor: 'bar-assertive', //Optional
+          modalFooterColor: 'bar-assertive', //Optional
+          // from: new Date(2012, 8, 2),   //Optional
+          // to: new Date(2018, 8, 25),    //Optional
+          callback: function (val) {    //Mandatory
+            $rootScope.datepickerObject.inputDate = new Date(val);
           }
-        }
+        };
       }
-    }
+    },
+    // views : {
+    //   'time-tab': {
+    //     templateUrl : 'templates/timezone.html',
+    //     controller  : 'TimezoneCtrl as vm',
+    //     resolve     : {
+    //       init : function($rootScope, $timeout) {
+    //         $rootScope.datepickerObject = {
+    //           titleLabel: 'Select',  //Optional
+    //           todayLabel: 'Today',  //Optional
+    //           closeLabel: 'Close',  //Optional
+    //           setLabel: 'Set',  //Optional
+    //           setButtonType   : 'button-assertive',  //Optional
+    //           todayButtonType : 'button-assertive',  //Optional
+    //           closeButtonType : 'button-assertive',  //Optional
+    //           inputDate: new Date(),    //Optional
+    //           // mondayFirst: true,    //Optional
+    //           // disabledDates: disabledDates, //Optional
+    //           // weekDaysList: weekDaysList,   //Optional
+    //           // monthList: monthList, //Optional
+    //           // templateType: 'popup', //Optional
+    //           modalHeaderColor: 'bar-assertive', //Optional
+    //           modalFooterColor: 'bar-assertive', //Optional
+    //           // from: new Date(2012, 8, 2),   //Optional
+    //           // to: new Date(2018, 8, 25),    //Optional
+    //           callback: function (val) {    //Mandatory
+    //             $rootScope.datepickerObject.inputDate = new Date(val);
+    //           }
+    //         };
+    //       }
+    //     }
+    //   }
+    // }
   })
-  .state('tabs.detailed', {
+  .state('detailed', {
     url   : '/timezone/detailed',
-    views : {
-      'time-tab': {
-        templateUrl: 'templates/detailed.html',
-        controller : 'DetailedCtrl as vm'
-      }
-    }
+    templateUrl: 'templates/detailed.html',
+    controller : 'DetailedCtrl as vm',
+    // views : {
+    //   'time-tab': {
+    //     templateUrl: 'templates/detailed.html',
+    //     controller : 'DetailedCtrl as vm'
+    //   }
+    // }
   })
-  .state('tabs.contacts', {
-    url   : '/contacts',
-    views : {
-      'contacts-tab': {
-        templateUrl: 'templates/contacts.html',
-        controller : 'ContactsCtrl as vm'
-      }
-    }
-  });
+  // .state('contacts', {
+  //   url   : '/contacts',
+  //   views : {
+  //     'contacts-tab': {
+  //       templateUrl: 'templates/contacts.html',
+  //       controller : 'ContactsCtrl as vm'
+  //     }
+  //   }
+  // });
 
-  $urlRouterProvider.otherwise('/tab/time');
+  $urlRouterProvider.otherwise('/time');
 });

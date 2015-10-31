@@ -9,5 +9,7 @@
     vm.title;
     vm.myLocation;
     vm.participants;
+    vm.eventId;
+    vm.revId;
   }
 }())

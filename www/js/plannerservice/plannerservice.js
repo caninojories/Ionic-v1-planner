@@ -28,10 +28,6 @@
             emit([doc.urgency, Date.parse(doc.date)])
           })
 
-          // initDesignDoc('by_id', function(doc){
-          //   emit(doc._id);
-          // })
-          // initDesignDoc('by_')
           // db.destroy().then(function() { console.log('ALL YOUR BASE ARE BELONG TO US') });
       };
 

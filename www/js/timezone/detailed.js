@@ -57,7 +57,6 @@
 
       /*make every item an object*/
       object_literal();
-      console.log(timezoneDataService.title);
       // receive data from timezoneDataService
       function object_literal(){
         date.tz(timezoneDataService.myLocation);
@@ -101,7 +100,6 @@
 
         for (var i = 0; i < vm.zone_list.length -1 ; i++) {
           var participant = {} ;
-          console.log(timezoneDataService.participants[1]);
           participant.participantname = timezoneDataService.participants[i].display_name;
           // participant.participantlocation= timezoneDataService.participants[i].address;
           participant.participantemail = timezoneDataService.participants[i].emails;
@@ -120,7 +118,13 @@
           objToStore.urgency = PASSED ;
         }
 
-        PlannerService.addItem(objToStore);
+        if (timezoneDataService.eventId){
+          objToStore._id = timezoneDataService.eventId;
+          objToStore._rev = timezoneDataService.revId;
+          PlannerService.updateItem(objToStore)
+        } else {
+          PlannerService.addItem(objToStore);
+        }
 
         /*attachement email*/
         var participants = objToStore.participants;
@@ -133,7 +137,7 @@
           disableAnimate: true,
           disableBack: true
         });
-        $state.go('tabs.time');
+        $state.go('time');
       }
 
       function times(zone, index) {

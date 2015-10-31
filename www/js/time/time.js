@@ -29,8 +29,7 @@
       }
 
       function displayDetail(id) {
-        // id, myLocale, myLocaleDate, myTime,participants, title
-        $state.go('tabs.timezone', {
+        $state.go('timezone', {
           timeId: id
         });
       }

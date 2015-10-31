@@ -11,6 +11,7 @@
       var vm = this;
 
       vm.participants                     = [];
+      vm.rev_id;
 
       vm.add_partcipants                  = add_partcipants;
       vm.detailed_view                    = detailed_view;
@@ -22,8 +23,8 @@
       $scope.$on('$ionicView.loaded', function(){
         if($stateParams.timeId){
           PlannerService.getItem($stateParams.timeId).then(function(event){
-            console.log(event)
             vm.title = event.title;
+            vm.rev_id = event._rev;
             vm.my_timezone = event.myLocale;
             $rootScope.datepickerObject.inputDate = event.myLocaleDate;
             if(event.participants){
@@ -123,6 +124,10 @@
         timezoneDataService.title =  vm.title;
         timezoneDataService.myLocation = vm.my_timezone;
         timezoneDataService.participants = vm.participants;
+        if ($stateParams.timeId){
+          timezoneDataService.eventId = $stateParams.timeId;
+          timezoneDataService.revId = vm.rev_id;
+        }
       }
 
       $ionicModal.fromTemplateUrl('templates/modal_add_participant.html', {
