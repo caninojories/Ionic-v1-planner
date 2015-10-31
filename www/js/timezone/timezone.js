@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('TimezoneCtrl', TimezoneCtrl);
 
-    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$stateParams', '$cordovaContacts', '$cordovaEmailComposer', '$ionicPopover', '$ionicModal', 'TimezoneDataService', 'PlannerService'];
+    TimezoneCtrl.$inject = ['$rootScope', '$scope', '$state', '$timeout', '$stateParams', '$cordovaContacts', '$cordovaEmailComposer', '$ionicPopover', '$ionicScrollDelegate', '$ionicModal', 'TimezoneDataService', 'PlannerService'];
 
-    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $stateParams, $cordovaContacts, $cordovaEmailComposer, $ionicPopover, $ionicModal, timezoneDataService, PlannerService) {
+    function TimezoneCtrl($rootScope, $scope, $state, $timeout, $stateParams, $cordovaContacts, $cordovaEmailComposer, $ionicPopover, $ionicScrollDelegate, $ionicModal, timezoneDataService, PlannerService) {
       var vm = this;
 
       vm.participants                     = [];
@@ -106,6 +106,9 @@
           emails: email?email:'',
           photos: photo?photo:''
         });
+        if(!$stateParams.timeId){
+          $ionicScrollDelegate.scrollBottom();
+        }
       }
 
       // function add_zone(zone) {

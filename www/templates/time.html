@@ -1,27 +1,26 @@
 <ion-view view-title="{{vm.todayDate | date:'dd - MMMM - yyyy'}}" >
   <!-- <ion-nav-buttons side="primary">
     <button class="icon ion-gear-a button button-clear button-outline"></button>
-  </ion-nav-buttons>
+  </ion-nav-buttons> -->
 
   <ion-nav-buttons side="secondary">
     <a ui-sref="timezone">
       <button class="icon ion-plus button button-clear button-outline">
       </button>
     </a>
-  </ion-nav-buttons> -->
+  </ion-nav-buttons>
 
   <ion-content class="has-header padding app-background">
     <ion-list class="list-inset padding-horizontal padding-bottom" ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
       <ion-item class="item-text-wrap ">
-        <h1 class="title icon ion-calendar planner-icon"> {{item.title}}</h1>
-        <h2 class="title card-header-upcomming"> {{item.urgency}}</h2>
+        <h1 class="title planner-icon"> {{item.title}}</h1>
+        <!-- <h2 class="title card-header-upcomming"> {{item.urgency}}</h2> -->
+        <p class="icon ion-location"> {{item.myLocale}} </p>
+        <p class="icon ion-clock"> {{item.myLocaleDate}}, {{item.myTime}}</p>
         <br/>
-        <h3 class="icon ion-location"> My Location: </h3>
-        <p >{{item.myLocale}}; {{item.myLocaleDate}}, {{item.myTime}}</p>
-        <br/>
-        <h3 class="icon ion-person-stalker"> Participants: </h3>
+        <h3 class="icon ion-person-stalker planner-icon"> Participants: </h3>
         <ion-list ng-repeat="participant in item.participants">
-          <ion-item class="item-thumbnail-left no-border">
+          <ion-item class="item-thumbnail-left item-avatar no-border">
             <img src="http://www.placehold.it/50x50" alt="contact-photo">
             <p>
               {{participant.participantname}}
@@ -44,9 +43,9 @@
     </ion-list>
   </ion-content>
 
-  <div class="bar bar-footer bar-assertive">
+  <!-- <div class="bar bar-footer bar-assertive">
     <div class="button-bar">
       <a  ui-sref="timezone" class="icon ion-plus button button-clear button-outline"></a>
     </div>
-  </div>
+  </div> -->
 </ion-view>

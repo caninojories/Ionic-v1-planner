@@ -18,7 +18,7 @@
       vm.zone_time          = [];
       vm.zone_time_counter  = 0;
       var date              = moment($rootScope.datepickerObject.inputDate);
-      var UPCOMMING         = "Upcomming" ;
+      var UPCOMMING         = "Upcoming" ;
       var PASSED            = "Passed" ;
 
       // document.addEventListener('deviceready', function() {

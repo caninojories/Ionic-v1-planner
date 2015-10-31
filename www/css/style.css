@@ -40,7 +40,7 @@
 .bar.bar-assertive, .tabs-assertive > .tabs {
   /*background-color: #D53D01 !important;*/
   border: 0px;
-  background-color: #333966 !important;
+  background-color: #151C1D !important;
 }
 
 .app-background {
@@ -49,7 +49,8 @@
 
 .planner-icon {
   /*color: #A73000 !important;*/
-  color: #333966 !important;
+  /*color: #646C6C !important;*/
+  color: #313839 !important;
 }
 
 .planner_form-text-xl {
