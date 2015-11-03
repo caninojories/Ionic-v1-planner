@@ -28,7 +28,11 @@
 }
 
 .orange {
-  background-color: red;
+  background-color: #11c1f3;
+}
+
+.orange > h5 {
+  color: white;
 }
 
 /*Detailed View*/
@@ -46,6 +50,10 @@
 .app-background {
   background-color: #FAFAFA !important;
 }
+
+/*.item {
+  background-color: #FAFAFA !important;
+}*/
 
 .planner-icon {
   /*color: #A73000 !important;*/

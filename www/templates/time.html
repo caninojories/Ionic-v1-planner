@@ -11,7 +11,7 @@
   </ion-nav-buttons>
 
   <ion-content class="has-header padding app-background">
-    <ion-list class="list-inset padding-horizontal padding-bottom" ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
+    <ion-list class="padding-horizontal padding-bottom" ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
       <ion-item class="item-text-wrap ">
         <h1 class="title planner-icon"> {{item.title}}</h1>
         <!-- <h2 class="title card-header-upcomming"> {{item.urgency}}</h2> -->
@@ -21,7 +21,7 @@
         <h3 class="icon ion-person-stalker planner-icon"> Participants: </h3>
         <ion-list ng-repeat="participant in item.participants">
           <ion-item class="item-thumbnail-left item-avatar no-border">
-            <img src="http://www.placehold.it/50x50" alt="contact-photo">
+            <img ng-src="{{participant.participantPhoto || ''}}">
             <p>
               {{participant.participantname}}
             </p>

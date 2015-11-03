@@ -5,9 +5,9 @@
     .module('app.timezone')
     .controller('DetailedCtrl', DetailedCtrl);
 
-    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$window', '$ionicHistory', '$cordovaFile', '$cordovaEmailComposer', 'PlannerService', 'TimezoneDataService'];
+    DetailedCtrl.$inject = ['$rootScope', '$scope', '$state', '$window', '$ionicHistory', '$cordovaFile', '$cordovaEmailComposer', 'PlannerService', 'TimezoneDataService', '$q'];
 
-    function DetailedCtrl($rootScope, $scope, $state, $window, $ionicHistory, $cordovaFile, $cordovaEmailComposer, PlannerService, timezoneDataService) {
+    function DetailedCtrl($rootScope, $scope, $state, $window, $ionicHistory, $cordovaFile, $cordovaEmailComposer, PlannerService, timezoneDataService, $q) {
       var vm = this;
 
       vm.choose_time        = choose_time;
@@ -89,6 +89,17 @@
       }
 
       function save_events() {
+        var objToStore = buildObjectToStore() ;
+
+        $q.when(buildObjectToStore()).then(function(objToStore){
+            saveToDB(objToStore);
+            participantMailerHelper(objToStore) ;
+        }).then(function(){
+          goToHomeScreen();
+        })
+      }
+
+      function buildObjectToStore() {
         var objToStore = {} ;
         // objToStore.timeArray = [] ;
         objToStore.participants = [] ;
@@ -96,28 +107,23 @@
         objToStore.myTime = vm.zone_list[0].data.item[vm.previous_index].time ;
         objToStore.myLocaleDate = vm.zone_list[0].data.item[vm.previous_index].cal ;
         objToStore.title = timezoneDataService.title ;
-        objToStore.date= date ;
+        objToStore.created_date= new Date() ;
 
         for (var i = 0; i < vm.zone_list.length -1 ; i++) {
           var participant = {} ;
           participant.participantname = timezoneDataService.participants[i].display_name;
-          // participant.participantlocation= timezoneDataService.participants[i].address;
           participant.participantemail = timezoneDataService.participants[i].emails;
-          // participant.participantPhotots here
+          participant.participantPhoto = timezoneDataService.participants[i].photos;
           participant.localename = vm.zone_list[i+1].name ;
           participant.localetime = vm.zone_list[i+1].data.item[vm.previous_index].time ;
           participant.localedate = vm.zone_list[i+1].data.item[vm.previous_index].cal ;
           objToStore.participants[i] = participant;
         }
 
-        var defaultUTCDate = moment.utc(date) ;
+        return objToStore;
+      }
 
-        if (defaultUTCDate > moment.utc()){
-          objToStore.urgency = UPCOMMING ;
-        } else {
-          objToStore.urgency = PASSED ;
-        }
-
+      function saveToDB(objToStore){
         if (timezoneDataService.eventId){
           objToStore._id = timezoneDataService.eventId;
           objToStore._rev = timezoneDataService.revId;
@@ -125,14 +131,17 @@
         } else {
           PlannerService.addItem(objToStore);
         }
+      }
 
-        /*attachement email*/
+      function participantMailerHelper(objToStore){
         var participants = objToStore.participants;
         if(participants.length !=0){
           icsSetup(objToStore.myLocaleDate, objToStore.myTime, objToStore.myLocale);
           send_email(participants);
         }
+      }
 
+      function goToHomeScreen(){
         $ionicHistory.nextViewOptions({
           disableAnimate: true,
           disableBack: true

@@ -24,20 +24,20 @@
           // Creates the database or opens if it already exists
           db = new PouchDB('plannerdb', {adapter: 'websql'});
 
-          initDesignDoc('by_urgency', function(doc) {
-            emit([doc.urgency, Date.parse(doc.date)])
+          initDesignDoc('by_createddate', function(doc) {
+            emit(Date.parse(doc.created_date))
           })
 
           // db.destroy().then(function() { console.log('ALL YOUR BASE ARE BELONG TO US') });
       };
 
       function initDesignDoc(ddocName, mapFunc){
-        var ddoc = createDesignDoc('by_urgency', function(doc) {
-          emit([doc.urgency, Date.parse(doc.date)])
+        var ddoc = createDesignDoc('by_createddate', function(doc) {
+          emit(Date.parse(doc.created_date))
         }) ;
         db.put(ddoc)
           .then(function(){
-            db.query('by_urgency', {limit:0})
+            db.query('by_createddate', {limit:0})
               .then(function(res){
                 console.log(res) ;
               })
@@ -55,7 +55,7 @@
 
       function getAllEvents() {
         // if(!events){
-          return $q.when(db.query('by_urgency', {
+          return $q.when(db.query('by_createddate', {
             include_docs: true,
             descending:true
           })).then(function(docs){

@@ -84,10 +84,12 @@
       });
 
       $scope.$on('add_controller_timezone_controller', function(event, participant) {
+        console.log("photo is: " + participant.photos[0].value);
+        var photoLocation = participant.photos[0].value
         vm.participants_modal.hide();
         vm.participants[vm.participant_index].display_name = participant.display_name;
         vm.participants[vm.participant_index].emails       = participant.emails[0].value;
-        vm.participants[vm.participant_index].photos       = participant.photos;
+        vm.participants[vm.participant_index].photos       = photoLocation ? photoLocation : null;
       });
 
       $scope.$on('add_controller_timezone_controller_cancel', function(){
@@ -173,12 +175,12 @@
       }
 
       $scope.moveItem = function(item, itemFromIndex, itemToIndex) {
-        vm.zone_list.splice(itemFromIndex, 1);
-        vm.zone_list.splice(itemToIndex, 0, item);
+        vm.participants.splice(itemFromIndex, 1);
+        vm.participants.splice(itemToIndex, 0, item);
       };
 
       $scope.onItemDelete = function(item) {
-        vm.zone_list.splice(vm.zone_list.indexOf(item), 1);
+        vm.participants.splice(vm.participants.indexOf(item), 1);
         $rootScope.data_object.push(item);
       };
 
