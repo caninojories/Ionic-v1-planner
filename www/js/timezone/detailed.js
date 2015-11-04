@@ -20,6 +20,16 @@
       var date              = moment($rootScope.datepickerObject.inputDate);
       var UPCOMMING         = "Upcoming" ;
       var PASSED            = "Passed" ;
+      var attachmentPath    = null;
+      var appointmentFileName = 'appointment.ics' ;
+
+      $scope.$on('$ionicView.enter', function(){
+        if(ionic.Platform.isAndroid){
+          attachmentPath = cordova.file.externalCacheDirectory ;
+        } else if (ionic.Platform.isIOS) {
+          attachmentPath = cordova.file.tempDirectory;
+        }
+      })
 
       // document.addEventListener('deviceready', function() {
       //   vm.cordovaFile = $cordovaFile;
@@ -37,14 +47,19 @@
         participants.forEach(function(participant) {
           contacts.push(participant.participantemail);
         });
+        var appointmentFile = [] ;
 
+        $cordovaFile.checkFile(attachmentPath, appointmentFile)
+        .then(function (success) {
+          appointmentFile.push(attachmentPath + appointmentFileName);
+        }, function (error) {
+          console.log("detailed.js, error on checking up file") ;
+        });
         var email = {
           to: contacts,
           cc: '',
           bcc: [],
-          attachments: [
-            cordova.file.dataDirectory + 'appointment.ics'
-          ],
+          attachments: appointmentFile,
           subject: '',
           body: '',
           isHtml: true
@@ -94,6 +109,8 @@
         $q.when(buildObjectToStore()).then(function(objToStore){
             saveToDB(objToStore);
             participantMailerHelper(objToStore) ;
+            // $cordovaFile.checkFile(cordova.file.cacheDirectory, "appointment.ics").then(function(success){console.log(console.log("cordova directory: file found"))}, function(error){console.log("cordova directory: file not found")})
+
         }).then(function(){
           goToHomeScreen();
         })
@@ -186,8 +203,8 @@
         ical[6] = 'DTEND;TZID=' + locale + ':' + start + 'T' + n(startTime) + '0000';
 
         // document.addEventListener('deviceready', function() {
-        var filePath = cordova.file.dataDirectory ;// ? cordova.file.externalRootDirectory : cordova.file.dataDirectory;
-          $cordovaFile.writeFile(filePath, 'appointment.ics', ical.join('\n'), true)
+        // var filePath = cordova.file.cacheDirectory ;// ? cordova.file.externalRootDirectory : cordova.file.dataDirectory;
+          $cordovaFile.writeFile(attachmentPath, appointmentFileName, ical.join('\n'), true)
           .then(function (success) {
             console.log(success);
           }, function (error) {
