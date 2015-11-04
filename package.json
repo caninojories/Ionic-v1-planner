@@ -16,11 +16,12 @@
   },
   "cordovaPlugins": [
     "org.apache.cordova.contacts",
+    "org.apache.cordova.file",
     {
       "locator": "https://github.com/katzer/cordova-plugin-email-composer.git",
       "id": "de.appplant.cordova.plugin.email-composer"
     },
-    "org.apache.cordova.file"
+    "cordova-plugin-x-toast"
   ],
   "cordovaPlatforms": [
     "ios",

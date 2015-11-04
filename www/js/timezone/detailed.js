@@ -54,6 +54,7 @@
           appointmentFile.push(attachmentPath + appointmentFileName);
         }, function (error) {
           console.log("detailed.js, error on checking up file") ;
+          window.plugins.toast.showLongBottom('Cannot attach appointment file. No memory card.') ;
         });
         var email = {
           to: contacts,
