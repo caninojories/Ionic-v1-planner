@@ -1,13 +1,14 @@
-<ion-view view-title="Detailed" class="detailed">
+<ion-view view-title="Detailed">
   <!-- <ion-content> -->
   <ion-nav-buttons side="secondary" >
-    <a ng-show="vm.previous_index !== null" ng-click="vm.save_events()">
+    <a  ng-click="vm.save_events()">
       <button class="icon ion-ios-checkmark-outline button button-clear button-outline"></button>
     </a>
   </ion-nav-buttons>
-  <ion-content direction="xy" class="text-center app-background">
+  <!-- <ion-content direction="xy" class="text-center"> -->
+  <ion-content>
   <!-- <ion-scroll zooming="true" direction="xy" style="width: 100%; height: 85%" class="has-header text-center"> -->
-    <div ng-repeat="zone in vm.zone_list" class="text-center padding" style="">
+    <!-- <div ng-repeat="zone in vm.zone_list" class="text-center padding" style="">
       {{zone.name}}
       <div ng-init="vm.times(zone, $index)"></div>
       <div class="row">
@@ -16,13 +17,26 @@
           ng-click="vm.choose_time(item.time, item, $index)" ng-class="{orange: item.class}">
             <h5 ng-bind-html="item.time"></h5>
           </div>
-          <!-- <ion-item class="padding" ng-repeat="item in zone.data.item track by $index"
+          !-- <ion-item class="padding" ng-repeat="item in zone.data.item track by $index"
             ng-click="vm.choose_time(item.time, item, $index)" ng-class="{orange: item.class}">
               <h2 ng-bind-html="item.time"></h2>
-          </ion-item> -->
+          </ion-item> --
         </div>
       </div>
-    </div>
+    </div> -->
+    <ion-list class="list-inset">
+      <label class="item item-input item-select" ng-repeat="zone in vm.zone_list">
+        <div class="input-label">
+          {{zone.name}}
+        </div>
+        <div ng-init="vm.times(zone, $index)"></div>
+        <select
+          ng-model="vm.selectedItemIndex"
+          ng-init="vm.selectedItemIndex = 0"
+          ng-options="zone.data.item.indexOf(item) as item.time for item in zone.data.item">
+        </select>
+      </label>
+    </ion-list>
 
   <!-- </ion-scroll> -->
   </ion-content>

@@ -22,6 +22,7 @@
       var PASSED            = "Passed" ;
       var attachmentPath    = null;
       var appointmentFileName = 'appointment.ics' ;
+      vm.selectedItemIndex  = 0;
 
       $scope.$on('$ionicView.enter', function(){
         if(ionic.Platform.isAndroid){
@@ -82,7 +83,8 @@
         }
       }
 
-      function choose_time(time, item, index) {
+      function choose_time(index) {
+        console.log("time chosen!" + index);
         /*check if we have previous click items*/
         if (vm.zone_time_counter === 0) {
           for (var i = 0; i < vm.zone_list.length; i++) {
@@ -122,8 +124,8 @@
         // objToStore.timeArray = [] ;
         objToStore.participants = [] ;
         objToStore.myLocale = vm.zone_list[0].name ;
-        objToStore.myTime = vm.zone_list[0].data.item[vm.previous_index].time ;
-        objToStore.myLocaleDate = vm.zone_list[0].data.item[vm.previous_index].cal ;
+        objToStore.myTime = vm.zone_list[0].data.item[vm.selectedItemIndex].time ;
+        objToStore.myLocaleDate = vm.zone_list[0].data.item[vm.selectedItemIndex].cal ;
         objToStore.title = timezoneDataService.title ;
         objToStore.created_date= new Date() ;
 
@@ -133,8 +135,8 @@
           participant.participantemail = timezoneDataService.participants[i].emails;
           participant.participantPhoto = timezoneDataService.participants[i].photos;
           participant.localename = vm.zone_list[i+1].name ;
-          participant.localetime = vm.zone_list[i+1].data.item[vm.previous_index].time ;
-          participant.localedate = vm.zone_list[i+1].data.item[vm.previous_index].cal ;
+          participant.localetime = vm.zone_list[i+1].data.item[vm.selectedItemIndex].time ;
+          participant.localedate = vm.zone_list[i+1].data.item[vm.selectedItemIndex].cal ;
           objToStore.participants[i] = participant;
         }
 

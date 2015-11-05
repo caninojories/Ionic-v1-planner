@@ -19,14 +19,6 @@
   font-size: 16 ;
 }
 
-.card-header-passed {
-  color: #EF473A !important;
-}
-
-.card-header-upcomming {
-  color: #387EF5 !important ;
-}
-
 .orange {
   background-color: #11c1f3;
 }
@@ -44,16 +36,32 @@
 .bar.bar-assertive, .tabs-assertive > .tabs {
   /*background-color: #D53D01 !important;*/
   border: 0px;
-  background-color: #151C1D !important;
+  background-color: #22313F !important;
 }
 
 .app-background {
-  background-color: #FAFAFA !important;
+  background-color: #D2D7D3 !important;
 }
 
-/*.item {
-  background-color: #FAFAFA !important;
-}*/
+.item-divider {
+  background-color: #ECECEC !important;
+}
+
+ion-item div.item-content h4 {
+  color: #2C3E50 !important;
+}
+
+ion-item  {
+  background-color: #FFFEFE !important;
+}
+
+ion-item div.item-content {
+  padding-right: 16px !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  padding-left: 16px !important;
+
+}
 
 .planner-icon {
   /*color: #A73000 !important;*/
