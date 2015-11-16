@@ -86,7 +86,7 @@
       $scope.$on('add_controller_timezone_controller', function(event, participant) {
         vm.participants_modal.hide();
         vm.participants[vm.participant_index].display_name = participant.display_name;
-        vm.participants[vm.participant_index].emails       = participant.hasOwnProperty(emails) ?  participant.emails[0].value : null ;
+        vm.participants[vm.participant_index].emails       = participant.emails.length > 0 ?  participant.emails[0].value : null ;
         vm.participants[vm.participant_index].photos       = participant.hasOwnProperty(photos) ?  participant.photos[0].value : null ;
       });
 
