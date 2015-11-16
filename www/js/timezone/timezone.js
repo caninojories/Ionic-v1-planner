@@ -84,12 +84,10 @@
       });
 
       $scope.$on('add_controller_timezone_controller', function(event, participant) {
-        console.log("photo is: " + participant.photos[0].value);
-        var photoLocation = participant.photos[0].value
         vm.participants_modal.hide();
         vm.participants[vm.participant_index].display_name = participant.display_name;
-        vm.participants[vm.participant_index].emails       = participant.emails[0].value;
-        vm.participants[vm.participant_index].photos       = photoLocation ? photoLocation : null;
+        vm.participants[vm.participant_index].emails       = participant.hasOwnProperty(emails) ?  participant.emails[0].value : null ;
+        vm.participants[vm.participant_index].photos       = participant.hasOwnProperty(photos) ?  participant.photos[0].value : null ;
       });
 
       $scope.$on('add_controller_timezone_controller_cancel', function(){
