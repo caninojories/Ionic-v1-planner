@@ -20,7 +20,7 @@
       <label class="item item-input-inset item-stacked-label">
         <span class="input-label planner_form-text-l icon ion-calendar"> Select a Date</span>
         <ionic-datepicker input-obj="datepickerObject">
-          <button class="button button-block button-outline button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+          <button class="button button-block button-outline button-stable"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
         </ionic-datepicker>
       </label>
       <label class="item item-input-inset item-stacked-label">
@@ -72,7 +72,7 @@
       </ion-list>
 
       <div class="padding">
-        <button ng-click="vm.add_partcipants()" class="button button-block button-clear button-positive icon ion-plus-circled"> Add</button>
+        <button ng-click="vm.add_partcipants()" class="button button-block button-clear button-stable icon ion-plus-circled"> Add</button>
       </div>
 
 

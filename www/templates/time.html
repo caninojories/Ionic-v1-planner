@@ -10,17 +10,19 @@
     </a>
   </ion-nav-buttons>
 
-  <ion-content class="has-header padding app-background">
-    <ion-list class="padding-horizontal padding-bottom" ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
+  <ion-content >
+    <ion-list ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
       <ion-item class="item-text-wrap ">
         <h1 class="title planner-icon"> {{item.title}}</h1>
         <h4 class="icon ion-location "> {{item.myLocale}} </h4>
         <h4 class="icon ion-clock"> {{item.myLocaleDate}}, {{item.myTime}}</h4>
-        <br/>
+        <br>
+
+        <ion-item class="item-divider no-border">
+          <h3 class="icon ion-person-stalker planner-icon"> Participants </h3>
+        </ion-item>
+        
         <ion-list ng-repeat="participant in item.participants">
-          <ion-item class="item-divider no-border">
-            <h3 class="icon ion-person-stalker planner-icon"> Participants </h3>
-          </ion-item>
           <ion-item class="item-thumbnail-left item-avatar no-border">
             <img ng-src="{{participant.participantPhoto || ''}}">
             <p>
