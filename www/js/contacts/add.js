@@ -21,12 +21,12 @@
       }, 10);
     });
 
-    $ionicModal.fromTemplateUrl('templates/popover_add_location.html', {
-      vm: vm,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      vm.add_location_modal = modal;
-    });
+    // $ionicModal.fromTemplateUrl('templates/popover_add_location.html', {
+    //   vm: vm,
+    //   animation: 'slide-in-up'
+    // }).then(function(modal) {
+    //   vm.add_location_modal = modal;
+    // });
 
     function show_add_location_modal() {
       vm.add_location_modal.show();

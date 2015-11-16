@@ -67,9 +67,9 @@
           }
 
           var opts = {
-            filter  : element.val(),
+            // filter  : element.val(),
             fields  : ['name.formatted'],
-            multiple: true,
+            multiple: false,
           };
 
           $cordovaContacts.find(opts).then(onSuccess, onError);

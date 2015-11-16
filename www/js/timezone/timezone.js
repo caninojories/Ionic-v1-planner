@@ -160,14 +160,14 @@
       }).then(function(modal) {
         vm.participant_location_modal = modal;
       });
-
-      $ionicModal.fromTemplateUrl('templates/modal_add_location.html', {
-        vm: vm,
-        animation: 'slide-in-up',
-        focusFirstInput: true,
-      }).then(function(modal) {
-        vm.participant_location_modal = modal;
-      });
+      //
+      // $ionicModal.fromTemplateUrl('templates/modal_add_location.html', {
+      //   vm: vm,
+      //   animation: 'slide-in-up',
+      //   focusFirstInput: true,
+      // }).then(function(modal) {
+      //   vm.participant_location_modal = modal;
+      // });
 
       function open_participants_modal($event, $index) {
         vm.participant_index = $index;
