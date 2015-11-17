@@ -79,7 +79,9 @@
         date.tz(timezoneDataService.myLocation);
         vm.zone_list.push({name: timezoneDataService.myLocation, data: {item:[]}});
         for( var i = 0; i < timezoneDataService.participants.length; i++) {
-          vm.zone_list.push({name : timezoneDataService.participants[i].address, data : {item:[]} });
+          if (timezoneDataService.participants[i].address) {
+            vm.zone_list.push({name : timezoneDataService.participants[i].address, data : {item:[]} });
+          }
         }
       }
 

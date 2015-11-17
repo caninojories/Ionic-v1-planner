@@ -26,9 +26,13 @@
 
       function loadData() {
         PlannerService.getAllEvents().then(function(eventslist){
-          if (eventslist){
+          if (eventslist.length != 0){
+            $rootScope.noEventsFlag = false;
             vm.timedata = eventslist ;
             vm.timecard = $state.params.timeId ;
+          } else {
+            $rootScope.noEventsFlag = true;
+            vm.displayDetail(null) ;
           }
         }) ;
       }

@@ -1,26 +1,20 @@
-<ion-view view-title="Add a new appointment">
+<ion-view view-title="Add a new appointment" hide-back-button="noEventsFlag">
   <ion-nav-buttons side="secondary" >
     <a ui-sref="detailed" ng-click="vm.detailed_view()" ng-show="vm.my_timezone && vm.title">
       <button class="icon ion-ios-checkmark-outline button button-clear button-outline"></button>
     </a>
   </ion-nav-buttons>
 
-  <!-- <ion-nav-buttons side="secondary">
-    <a href="#/tab/time/timezone">
-      <button class="icon ion-plus button button-clear button-outline">
-      </button>
-    </a>
-  </ion-nav-buttons> -->
   <ion-content>
     <div class="list">
       <label class="item item-input-inset item-stacked-label">
-        <span class="input-label planner_form-text-xl">Title</span>
+        <span class="input-label planner_form-text-l">Title</span>
         <input type="text" ng-model="vm.title">
       </label>
       <label class="item item-input-inset item-stacked-label">
         <span class="input-label planner_form-text-l icon ion-calendar"> Select a Date</span>
         <ionic-datepicker input-obj="datepickerObject">
-          <button class="button button-block button-outline button-stable"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+          <button class="button button-block button-outline button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
         </ionic-datepicker>
       </label>
       <label class="item item-input-inset item-stacked-label">
@@ -28,52 +22,58 @@
         <input type="text" ng-click="vm.open_my_location_modal($event)" ng-model="vm.my_timezone">
       </label>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col">
-        </div>
+        </div> -->
         <div ng-show="vm.showReorder">
+          <div class="row">
+            <div class="col">
+            </div>
           <button ng-click="vm.showReorder = !vm.showReorder; data.showDelete = false;" class="button button-large button-icon ion-navicon">
           </button>
+          </div>
         </div>
-      </div>
+      <!-- </div> -->
 
-      <ion-list class="padding" show-delete="vm.showDelete" show-reorder="vm.showReorder">
-        <!-- <h4>Participants</h4> -->
-        <label class="item item-input-inset item-stacked-label">
-          <span class="input-label icon ion-person-stalker planner_form-text-l"> Participants</span>
-        </label>
-        <ion-item ng-repeat="participant in vm.participants" on-hold="vm.on_hold(zone)">
-          <div class="name padding-left">
-            <h4>Name: </h4>
-            <label class="item item-input">
-              <input class="button-block" ng-click="vm.open_participants_modal($event, $index)" type="text" ng-model="participant.display_name">
-            </label>
-          </div>
-          </br>
-          <div class="location padding-left">
-            <h4>Location: </h4>
-            <label class="item item-input">
-              <input search-contacts ng-click="vm.open_participant_location_modal($event, $index)" type="text" ng-model="participant.address">
-            </label>
-          </div>
-          </br>
-          <div class="email padding-left">
-            <h4>Email: </h4>
-            <label class="item item-input">
-              <input class="button-block" type="text" ng-model="participant.emails">
-            </label>
-          </div>
-          <ion-option-button class="button-clear button-assertive" ng-click="onItemDelete(participant)">
-            Delete? <i class="ion-checkmark-circled padding-left"></i>
-          </ion-option-button>
-          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(participant, $fromIndex, $toIndex)">
-          </ion-reorder-button>
-        </ion-item>
-      </ion-list>
 
-      <div class="padding">
-        <button ng-click="vm.add_partcipants()" class="button button-block button-clear button-stable icon ion-plus-circled"> Add</button>
-      </div>
+        <ion-list show-delete="vm.showDelete" show-reorder="vm.showReorder">
+          <!-- <h4>Participants</h4> -->
+          <label class="item item-input-inset item-stacked-label">
+            <span class="input-label icon ion-person-stalker planner_form-text-l" > Participants</span>
+            <br>
+          </label>
+          <ion-item ng-repeat="participant in vm.participants" on-hold="vm.on_hold(zone)">
+            <div class="name ">
+              <h4>Name: </h4>
+              <label class="item item-input">
+                <input class="button-block" ng-click="vm.open_participants_modal($event, $index)" type="text" ng-model="participant.display_name">
+              </label>
+            </div>
+            </br>
+            <div class="location">
+              <h4>Location: </h4>
+              <label class="item item-input">
+                <input search-contacts ng-click="vm.open_participant_location_modal($event, $index)" type="text" ng-model="participant.address">
+              </label>
+            </div>
+            </br>
+            <div class="email">
+              <h4>Email: </h4>
+              <label class="item item-input">
+                <input class="button-block" type="text" ng-model="participant.emails">
+              </label>
+            </div>
+            <ion-option-button class="button-clear button-assertive" ng-click="onItemDelete(participant)">
+              Delete? <i class="ion-checkmark-circled padding-left"></i>
+            </ion-option-button>
+            <ion-reorder-button class="ion-navicon" on-reorder="moveItem(participant, $fromIndex, $toIndex)">
+            </ion-reorder-button>
+          </ion-item>
+        </ion-list>
+
+    <div class="padding">
+      <button ng-click="vm.add_partcipants()" class="button button-large button-block button-clear button-positive icon ion-plus-circled"></button>
+    </div>
 
 
     </div>

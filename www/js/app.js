@@ -54,21 +54,25 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic-datepicker', 'app.contac
           todayLabel: 'Today',  //Optional
           closeLabel: 'Close',  //Optional
           setLabel: 'Set',  //Optional
-          setButtonType   : 'button-assertive',  //Optional
-          todayButtonType : 'button-assertive',  //Optional
-          closeButtonType : 'button-assertive',  //Optional
+          setButtonType   : 'button-positive',  //Optional
+          todayButtonType : 'button-positive',  //Optional
+          closeButtonType : 'button-positive',  //Optional
           inputDate: new Date(),    //Optional
           // mondayFirst: true,    //Optional
           // disabledDates: disabledDates, //Optional
           // weekDaysList: weekDaysList,   //Optional
           // monthList: monthList, //Optional
           // templateType: 'popup', //Optional
-          modalHeaderColor: 'bar-assertive', //Optional
-          modalFooterColor: 'bar-assertive', //Optional
+          modalHeaderColor: 'bar-positive', //Optional
+          modalFooterColor: 'bar-positive', //Optional
           // from: new Date(2012, 8, 2),   //Optional
           // to: new Date(2018, 8, 25),    //Optional
           callback: function (val) {    //Mandatory
-            $rootScope.datepickerObject.inputDate = new Date(val);
+            if (val === undefined){
+              $rootScope.datepickerObject.inputDate = new Date();
+            } else {
+              $rootScope.datepickerObject.inputDate = new Date(val);
+            }
           }
         };
       }

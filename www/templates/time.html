@@ -10,7 +10,7 @@
     </a>
   </ion-nav-buttons>
 
-  <ion-content >
+  <ion-content class="app-background" ng-show="vm.timedata.length !== 0">
     <ion-list ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
       <ion-item class="item-text-wrap ">
         <h1 class="title planner-icon"> {{item.title}}</h1>
@@ -18,10 +18,10 @@
         <h4 class="icon ion-clock"> {{item.myLocaleDate}}, {{item.myTime}}</h4>
         <br>
 
-        <ion-item class="item-divider no-border">
-          <h3 class="icon ion-person-stalker planner-icon"> Participants </h3>
+        <ion-item class="item-divider no-border"  ng-show="item.participants.length > 0">
+          <h3 class="icon ion-person-stalker "> Participants </h3>
         </ion-item>
-        
+
         <ion-list ng-repeat="participant in item.participants">
           <ion-item class="item-thumbnail-left item-avatar no-border">
             <img ng-src="{{participant.participantPhoto || ''}}">
@@ -45,6 +45,10 @@
       </ion-item>
     </ion-list>
   </ion-content>
+<!-- 
+    <ion-content class="app-background" id="no-data" ng-show="vm.timedata.length === 0">
+      <h1>No Events</h1>
+    </ion-content> -->
 
   <!-- <div class="bar bar-footer bar-assertive">
     <div class="button-bar">
