@@ -88,6 +88,7 @@
         vm.participants[vm.participant_index].display_name = participant.display_name;
         vm.participants[vm.participant_index].emails       = participant.emails.length > 0 ?  participant.emails[0].value : null ;
         vm.participants[vm.participant_index].photos       = participant.hasOwnProperty(photos) ?  participant.photos[0].value : null ;
+        // window.plugins.toast.showLongBottom(vm.participants[vm.participant_index].photos) ;
       });
 
       $scope.$on('add_controller_timezone_controller_cancel', function(){

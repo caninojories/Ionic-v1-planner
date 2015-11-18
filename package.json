@@ -24,17 +24,12 @@
     "cordova-plugin-x-toast"
   ],
   "cordovaPlatforms": [
-    "ios",
     "android",
     {
       "platform": "android",
       "version": "",
       "locator": "android"
     },
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
+    "ios"
   ]
 }
