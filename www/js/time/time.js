@@ -19,6 +19,7 @@
       vm.loadData = loadData ;
       vm.displayDetail = displayDetail ;
       vm.deleteItem = deleteItem ;
+      vm.bookmarkItem = bookmarkItem ;
 
       $scope.$on("$ionicView.enter", function(){
         vm.todayDate = new Date();
@@ -47,6 +48,11 @@
         PlannerService.deleteItem(item);
         loadData();
       }
+
+      function bookmarkItem(item) {
+        console.log("item bookmarked");
+      }
+
       vm.loadData() ;
   }
 }()) ;

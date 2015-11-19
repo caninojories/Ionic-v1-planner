@@ -3,11 +3,15 @@
     <button class="icon ion-gear-a button button-clear button-outline"></button>
   </ion-nav-buttons> -->
 
-  <ion-nav-buttons side="secondary">
+  <ion-nav-buttons side="right">
     <a ui-sref="timezone">
       <button class="icon ion-plus button button-clear button-outline">
       </button>
     </a>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="left">
+    <button class="icon ion-bookmark button button-clear button-outline"></button>
   </ion-nav-buttons>
 
   <ion-content class="app-background" ng-show="vm.timedata.length !== 0">
@@ -40,12 +44,15 @@
           </ion-item>
         </ion-list>
         <ion-option-button class="button-clear button-assertive" ng-click="vm.deleteItem(item)">
-          Delete Meeting? <i class="ion-checkmark-circled padding-left"></i>
+          <i class="ion-trash-a"></i>
+        </ion-option-button>
+        <ion-option-button class="button-clear button-stable" ng-click="vm.bookmarkItem(item)">
+          <i class="ion-star"></i>
         </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>
-<!-- 
+<!--
     <ion-content class="app-background" id="no-data" ng-show="vm.timedata.length === 0">
       <h1>No Events</h1>
     </ion-content> -->
