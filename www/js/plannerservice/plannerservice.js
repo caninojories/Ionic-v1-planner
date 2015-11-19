@@ -12,11 +12,12 @@
       return {
         initDB: initDB,
 
-        getItem       : getItem,
-        getAllEvents  : getAllEvents,
-        addItem       : addItem,
-        updateItem    : updateItem,
-        deleteItem    : deleteItem
+        getItem                : getItem,
+        getAllEvents           : getAllEvents,
+        getAllBookmarkedEvents : getAllBookmarkedEvents,
+        addItem                : addItem,
+        updateItem             : updateItem,
+        deleteItem             : deleteItem
       } ;
 
 
@@ -26,7 +27,11 @@
 
           initDesignDoc('by_createddate', function(doc) {
             emit(Date.parse(doc.created_date))
-          })
+          });
+
+          initDesignDoc('by_bookmark_flag', function(doc){
+            emit(doc.bookmark_flag)
+          });
 
           // db.destroy().then(function() { console.log('ALL YOUR BASE ARE BELONG TO US') });
       };
@@ -70,6 +75,21 @@
         // } else {
         //   return $q.when(events) ;
         // }
+      }
+
+      function getAllBookmarkedEvents() {
+        return $q.when(db.query('by_bookmark_flag', {
+          include_docs: true,
+          descending: true
+        })).then(function(doc){
+          events = docs.rows.map(function(row){
+            return row.doc ;
+          }) ;
+
+          db.changes({ live: true, since: 'now', include_docs: true})
+                     .on('change', onDatabaseChange) ;
+          return events ;
+        })
       }
 
       function getItem(id){
