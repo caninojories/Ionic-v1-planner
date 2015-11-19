@@ -40,38 +40,6 @@
         }
       });
 
-      // vm.send_email   = send_email;
-      //
-      // $cordovaEmailComposer.isAvailable().then(function() {
-      //   console.log('available');
-      // }, function () {
-      //   console.log('not available');
-      // });
-      //
-      // function send_email() {
-      //   var contacts = [];
-      //   /*get the participants*/
-      //   vm.participants.forEach(function(participant) {
-      //     contacts.push(participant.emails);
-      //   });
-      //
-      //   var email = {
-      //     to: contacts,
-      //     cc: '',
-      //     bcc: [],
-      //     attachments: [
-      //       cordova.file.externalRootDirectory + 'new_file1.ics'
-      //     ],
-      //     subject: '',
-      //     body: '',
-      //     isHtml: true
-      //   };
-      //
-      //   $cordovaEmailComposer.open(email).then(null, function (data) {
-      //     console.log(data);
-      //   });
-      // }
-
 
       $scope.$on('add_location_controller_timezone_controller_for_my_location', function(event, zone) {
         vm.my_timezone = zone;
@@ -112,18 +80,6 @@
             photos: photo?photo:''
           });
       }
-
-      // function add_zone(zone) {
-      //   vm.zone = zone;
-      //
-      //   $scope.popover.remove();
-      //   $ionicModal.fromTemplateUrl('templates/popover_search.html', {
-      //     vm: vm,
-      //     animation: 'slide-in-up'
-      //   }).then(function(popover) {
-      //     vm.my_location_modal = popover;
-      //   });
-      // }
 
       function detailed_view() {
         timezoneDataService.title =  vm.title;
