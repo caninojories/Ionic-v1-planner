@@ -24,6 +24,7 @@
         if($stateParams.timeId){
           PlannerService.getItem($stateParams.timeId).then(function(event){
             vm.title = event.title;
+            vm.bookmark_flag = event.bookmark_flag;
             vm.rev_id = event._rev;
             vm.my_timezone = event.myLocale;
             $rootScope.datepickerObject.inputDate = event.myLocaleDate;
@@ -83,6 +84,7 @@
 
       function detailed_view() {
         timezoneDataService.title =  vm.title;
+        timezoneDataService.bookmark_flag = vm.bookmark_flag ? vm.bookmark_flag : null ;
         timezoneDataService.myLocation = vm.my_timezone;
         timezoneDataService.participants = vm.participants;
         if ($stateParams.timeId){

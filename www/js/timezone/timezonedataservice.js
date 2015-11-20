@@ -7,6 +7,7 @@
   function TimezoneDataService(){
     var vm = this;
     vm.title;
+    vm.bookmark_flag = null;
     vm.myLocation;
     vm.participants;
     vm.eventId;

@@ -8,8 +8,6 @@
   TimeCtrl.$inject = ['$rootScope', '$scope', '$http', '$state', '$timeout', '$cordovaFile', 'PlannerService'] ;
 
   function TimeCtrl($rootScope, $scope, $http, $state, $timeout, $cordovaFile, PlannerService) {
-      // Initialize DB
-      PlannerService.initDB() ;
       var vm = this ;
 
       vm.timedata = [];
@@ -20,6 +18,12 @@
       vm.displayDetail = displayDetail ;
       vm.deleteItem = deleteItem ;
       vm.bookmarkItem = bookmarkItem ;
+
+      $scope.$on("$ionicView.loaded", function(){
+        // Initialize DB
+        PlannerService.initDB() ;
+        vm.loadData() ;
+      })
 
       $scope.$on("$ionicView.enter", function(){
         vm.todayDate = new Date();
@@ -50,9 +54,9 @@
       }
 
       function bookmarkItem(item) {
+        item.bookmark_flag = !item.bookmark_flag ;
+        PlannerService.updateItem(item) ;
         console.log("item bookmarked");
       }
-
-      vm.loadData() ;
   }
 }()) ;
