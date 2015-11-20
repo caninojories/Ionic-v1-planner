@@ -10,15 +10,11 @@
     </a>
   </ion-nav-buttons>
 
-  <!-- <ion-nav-buttons side="left">
-    <button class="icon ion-bookmark button button-clear button-outline"></button>
-  </ion-nav-buttons> -->
-
   <ion-content class="app-background" ng-show="vm.timedata.length !== 0">
     <ion-list ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
       <ion-item class="item-text-wrap ">
         <h1 class="title planner-icon">
-          <i class="icon ion-bookmark" ng-if="item.bookmark_flag === true"></i> {{item.title}}
+          <i class="icon ion-bookmark on-bookmark" ng-if="item.bookmark_flag === true"></i> {{item.title}}
         </h1>
         <h4 class="icon ion-location "> {{item.myLocale}} </h4>
         <h4 class="icon ion-clock"> {{item.myLocaleDate}}, {{item.myTime}}</h4>
@@ -49,7 +45,7 @@
           <i class="ion-trash-a"></i>
         </ion-option-button>
         <ion-option-button class="button-clear button-stable" ng-click="vm.bookmarkItem(item)">
-          <i class="ion-star"></i>
+          <i class="ion-star" ng-class="{'on-bookmark': item.bookmark_flag}"></i>
         </ion-option-button>
       </ion-item>
     </ion-list>

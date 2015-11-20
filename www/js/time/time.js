@@ -56,7 +56,7 @@
       function bookmarkItem(item) {
         item.bookmark_flag = !item.bookmark_flag ;
         PlannerService.updateItem(item) ;
-        console.log("item bookmarked");
+        loadData();
       }
   }
 }()) ;
