@@ -107,12 +107,10 @@ div.list ion-item div.item-content div label input[type="text"] {
   color: #6E6662 !important;
 }
 
-#no-data {
-    display:flex;
-    align-items: center;
-    justify-content: center;
+.button-clear.button-stable {
+  color: #6E6662 !important;
 }
 
-#no-data h1 {
-  color: #6E6662;
+.on-bookmark {
+  color: #2B4C7D !important;
 }

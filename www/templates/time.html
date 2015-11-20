@@ -3,7 +3,7 @@
     <button class="icon ion-gear-a button button-clear button-outline"></button>
   </ion-nav-buttons> -->
 
-  <ion-nav-buttons side="secondary">
+  <ion-nav-buttons side="right">
     <a ui-sref="timezone">
       <button class="icon ion-plus button button-clear button-outline">
       </button>
@@ -13,7 +13,9 @@
   <ion-content class="app-background" ng-show="vm.timedata.length !== 0">
     <ion-list ng-repeat="item in vm.timedata" ng-click="vm.displayDetail(item._id)">
       <ion-item class="item-text-wrap ">
-        <h1 class="title planner-icon"> {{item.title}}</h1>
+        <h1 class="title planner-icon">
+          <i class="icon ion-bookmark on-bookmark" ng-if="item.bookmark_flag === true"></i> {{item.title}}
+        </h1>
         <h4 class="icon ion-location "> {{item.myLocale}} </h4>
         <h4 class="icon ion-clock"> {{item.myLocaleDate}}, {{item.myTime}}</h4>
         <br>
@@ -40,15 +42,14 @@
           </ion-item>
         </ion-list>
         <ion-option-button class="button-clear button-assertive" ng-click="vm.deleteItem(item)">
-          Delete Meeting? <i class="ion-checkmark-circled padding-left"></i>
+          <i class="ion-trash-a"></i>
+        </ion-option-button>
+        <ion-option-button class="button-clear button-stable" ng-click="vm.bookmarkItem(item)">
+          <i class="ion-star" ng-class="{'on-bookmark': item.bookmark_flag}"></i>
         </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>
-<!-- 
-    <ion-content class="app-background" id="no-data" ng-show="vm.timedata.length === 0">
-      <h1>No Events</h1>
-    </ion-content> -->
 
   <!-- <div class="bar bar-footer bar-assertive">
     <div class="button-bar">

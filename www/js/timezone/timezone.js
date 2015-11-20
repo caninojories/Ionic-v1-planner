@@ -24,6 +24,7 @@
         if($stateParams.timeId){
           PlannerService.getItem($stateParams.timeId).then(function(event){
             vm.title = event.title;
+            vm.bookmark_flag = event.bookmark_flag;
             vm.rev_id = event._rev;
             vm.my_timezone = event.myLocale;
             $rootScope.datepickerObject.inputDate = event.myLocaleDate;
@@ -39,38 +40,6 @@
           });
         }
       });
-
-      // vm.send_email   = send_email;
-      //
-      // $cordovaEmailComposer.isAvailable().then(function() {
-      //   console.log('available');
-      // }, function () {
-      //   console.log('not available');
-      // });
-      //
-      // function send_email() {
-      //   var contacts = [];
-      //   /*get the participants*/
-      //   vm.participants.forEach(function(participant) {
-      //     contacts.push(participant.emails);
-      //   });
-      //
-      //   var email = {
-      //     to: contacts,
-      //     cc: '',
-      //     bcc: [],
-      //     attachments: [
-      //       cordova.file.externalRootDirectory + 'new_file1.ics'
-      //     ],
-      //     subject: '',
-      //     body: '',
-      //     isHtml: true
-      //   };
-      //
-      //   $cordovaEmailComposer.open(email).then(null, function (data) {
-      //     console.log(data);
-      //   });
-      // }
 
 
       $scope.$on('add_location_controller_timezone_controller_for_my_location', function(event, zone) {
@@ -114,20 +83,9 @@
           });
       }
 
-      // function add_zone(zone) {
-      //   vm.zone = zone;
-      //
-      //   $scope.popover.remove();
-      //   $ionicModal.fromTemplateUrl('templates/popover_search.html', {
-      //     vm: vm,
-      //     animation: 'slide-in-up'
-      //   }).then(function(popover) {
-      //     vm.my_location_modal = popover;
-      //   });
-      // }
-
       function detailed_view() {
         timezoneDataService.title =  vm.title;
+        timezoneDataService.bookmark_flag = vm.bookmark_flag ? vm.bookmark_flag : null ;
         timezoneDataService.myLocation = vm.my_timezone;
         timezoneDataService.participants = vm.participants;
         if ($stateParams.timeId){

@@ -122,7 +122,7 @@
 
       function buildObjectToStore() {
         var objToStore = {} ;
-        // objToStore.timeArray = [] ;
+        objToStore.bookmark_flag = timezoneDataService.bookmark_flag === null ? false : true;
         objToStore.participants = [] ;
         objToStore.myLocale = vm.zone_list[0].name ;
         objToStore.myTime = vm.zone_list[0].data.item[vm.selectedItemIndex].time ;
