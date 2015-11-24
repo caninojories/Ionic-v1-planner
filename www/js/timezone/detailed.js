@@ -25,10 +25,10 @@
       vm.selectedItemIndex  = 0;
 
       $scope.$on('$ionicView.enter', function(){
-        if(ionic.Platform.isAndroid){
+        if(ionic.Platform.isAndroid()){
           attachmentPath = cordova.file.externalCacheDirectory ;
-        } else if (ionic.Platform.isIOS) {
-          attachmentPath = cordova.file.tempDirectory;
+        } else if (ionic.Platform.isIOS()) {
+          attachmentPath = cordova.file.cacheDirectory;
         }
       })
 
@@ -50,18 +50,17 @@
         });
         var appointmentFile = [] ;
 
-        $cordovaFile.checkFile(attachmentPath, appointmentFile)
+        $cordovaFile.checkFile(attachmentPath, appointmentFileName)
         .then(function (success) {
           appointmentFile.push(attachmentPath + appointmentFileName);
         }, function (error) {
           console.log("detailed.js, error on checking up file") ;
-          window.plugins.toast.showLongBottom('Cannot attach appointment file. No memory card.') ;
         });
         var email = {
           to: contacts,
           cc: '',
           bcc: [],
-          attachments: appointmentFile,
+          attachments: [attachmentPath + appointmentFileName],
           subject: '',
           body: '',
           isHtml: true
@@ -79,7 +78,9 @@
         date.tz(timezoneDataService.myLocation);
         vm.zone_list.push({name: timezoneDataService.myLocation, data: {item:[]}});
         for( var i = 0; i < timezoneDataService.participants.length; i++) {
-          vm.zone_list.push({name : timezoneDataService.participants[i].address, data : {item:[]} });
+          if (timezoneDataService.participants[i].address) {
+            vm.zone_list.push({name : timezoneDataService.participants[i].address, data : {item:[]} });
+          }
         }
       }
 
@@ -121,7 +122,7 @@
 
       function buildObjectToStore() {
         var objToStore = {} ;
-        // objToStore.timeArray = [] ;
+        objToStore.bookmark_flag = timezoneDataService.bookmark_flag === null ? false : true;
         objToStore.participants = [] ;
         objToStore.myLocale = vm.zone_list[0].name ;
         objToStore.myTime = vm.zone_list[0].data.item[vm.selectedItemIndex].time ;

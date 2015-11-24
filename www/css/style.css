@@ -1,4 +1,13 @@
 /* Empty. Add your own CSS if you like */
+
+/* colors:
+#2B4C7D : Blue
+#6E6662 : DGray
+#1E1E1F : Black
+#2A363B : DBlue
+#EFEFEF : Gray
+#648F00 : Green
+*/
 .no-top-padding {
   padding-top: 0px;
 }
@@ -32,23 +41,27 @@
   display: inline-flex;
 }
 
-/* Custom app-wide colors */
-.bar.bar-assertive, .tabs-assertive > .tabs {
-  /*background-color: #D53D01 !important;*/
+/* Custom app-wide colors - Override the defaults of ionic without doing sass stuff */
+.bar.bar-positive {
   border: 0px;
-  background-color: #22313F !important;
+  background-color: #2B4C7D !important;
 }
 
+.button-outline.button-positive {
+  color: #2B4C7D !important;
+  border-color: #2B4C7D !important;
+}
+
+ .button-clear.button-positive {
+   color: #2B4C7D !important;
+ }
+
 .app-background {
-  background-color: #D2D7D3 !important;
+  background-color: #EFEFEF !important;
 }
 
 .item-divider {
-  background-color: #ECECEC !important;
-}
-
-ion-item div.item-content h4 {
-  color: #2C3E50 !important;
+  background-color: #EFEFEF !important;
 }
 
 ion-item  {
@@ -66,7 +79,7 @@ ion-item div.item-content {
 .planner-icon {
   /*color: #A73000 !important;*/
   /*color: #646C6C !important;*/
-  color: #313839 !important;
+  color: #2A363B !important;
 }
 
 .planner_form-text-xl {
@@ -74,5 +87,30 @@ ion-item div.item-content {
 }
 
 .planner_form-text-l {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+}
+
+h3,
+h4,
+span.input-label {
+  color: #1E1E1F !important;
+}
+
+/* Timezone style overrides */
+div.list label.item-stacked-label input[type="text"] {
+  color: #6E6662 !important;
+  font-size: 2rem;
+  height: 4rem;
+}
+
+div.list ion-item div.item-content div label input[type="text"] {
+  color: #6E6662 !important;
+}
+
+.button-clear.button-stable {
+  color: #6E6662 !important;
+}
+
+.on-bookmark {
+  color: #2B4C7D !important;
 }

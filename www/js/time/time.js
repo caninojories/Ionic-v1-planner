@@ -8,8 +8,6 @@
   TimeCtrl.$inject = ['$rootScope', '$scope', '$http', '$state', '$timeout', '$cordovaFile', 'PlannerService'] ;
 
   function TimeCtrl($rootScope, $scope, $http, $state, $timeout, $cordovaFile, PlannerService) {
-      // Initialize DB
-      PlannerService.initDB() ;
       var vm = this ;
 
       vm.timedata = [];
@@ -19,6 +17,13 @@
       vm.loadData = loadData ;
       vm.displayDetail = displayDetail ;
       vm.deleteItem = deleteItem ;
+      vm.bookmarkItem = bookmarkItem ;
+
+      $scope.$on("$ionicView.loaded", function(){
+        // Initialize DB
+        PlannerService.initDB() ;
+        vm.loadData() ;
+      })
 
       $scope.$on("$ionicView.enter", function(){
         vm.todayDate = new Date();
@@ -26,9 +31,13 @@
 
       function loadData() {
         PlannerService.getAllEvents().then(function(eventslist){
-          if (eventslist){
+          if (eventslist.length != 0){
+            $rootScope.noEventsFlag = false;
             vm.timedata = eventslist ;
             vm.timecard = $state.params.timeId ;
+          } else {
+            $rootScope.noEventsFlag = true;
+            vm.displayDetail(null) ;
           }
         }) ;
       }
@@ -43,6 +52,11 @@
         PlannerService.deleteItem(item);
         loadData();
       }
-      vm.loadData() ;
+
+      function bookmarkItem(item) {
+        item.bookmark_flag = !item.bookmark_flag ;
+        PlannerService.updateItem(item) ;
+        loadData();
+      }
   }
 }()) ;

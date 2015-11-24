@@ -12,11 +12,11 @@
       return {
         initDB: initDB,
 
-        getItem       : getItem,
-        getAllEvents  : getAllEvents,
-        addItem       : addItem,
-        updateItem    : updateItem,
-        deleteItem    : deleteItem
+        getItem                : getItem,
+        getAllEvents           : getAllEvents,
+        addItem                : addItem,
+        updateItem             : updateItem,
+        deleteItem             : deleteItem
       } ;
 
 
@@ -24,20 +24,21 @@
           // Creates the database or opens if it already exists
           db = new PouchDB('plannerdb', {adapter: 'websql'});
 
-          initDesignDoc('by_createddate', function(doc) {
+          initDesignDoc('by_bookmarkflag_createddate', function(doc) {
             emit(Date.parse(doc.created_date))
-          })
+          });
 
+          /* TODO : Development Convenience; delete when in production */
           // db.destroy().then(function() { console.log('ALL YOUR BASE ARE BELONG TO US') });
       };
 
       function initDesignDoc(ddocName, mapFunc){
-        var ddoc = createDesignDoc('by_createddate', function(doc) {
-          emit(Date.parse(doc.created_date))
+        var ddoc = createDesignDoc('by_bookmarkflag_createddate', function(doc) {
+          emit([doc.bookmark_flag, Date.parse(doc.created_date)])
         }) ;
         db.put(ddoc)
           .then(function(){
-            db.query('by_createddate', {limit:0})
+            db.query('by_bookmarkflag_createddate', {limit:0})
               .then(function(res){
                 console.log(res) ;
               })
@@ -55,7 +56,7 @@
 
       function getAllEvents() {
         // if(!events){
-          return $q.when(db.query('by_createddate', {
+          return $q.when(db.query('by_bookmarkflag_createddate', {
             include_docs: true,
             descending:true
           })).then(function(docs){
