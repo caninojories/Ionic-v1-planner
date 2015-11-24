@@ -68,8 +68,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic-datepicker', 'app.contac
           // from: new Date(2012, 8, 2),   //Optional
           // to: new Date(2018, 8, 25),    //Optional
           callback: function (val) {    //Mandatory
-            $rootScope.datepickerObject.inputDate = new Date(val);
-          }
+            if (val === undefined) {
+              $rootScope.datepickerObject.inputDate = 'No date Selected';
+            } else {
+              $rootScope.datepickerObject.inputDate = new Date(val);
+            }
+
+          },
+          closeOnSelect: false
         };
       }
     },
